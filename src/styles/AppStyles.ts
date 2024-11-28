@@ -1,5 +1,6 @@
 import {StyleSheet} from 'react-native';
 
+// Definimos las constantes necesarias dentro del mismo archivo
 const Colors = {
   primary: '#3498db',
   secondary: '#2ecc71',
@@ -25,6 +26,7 @@ const FontSize = {
   xlarge: 24,
 };
 
+// Definimos los estilos utilizando las constantes
 const AppStyles = StyleSheet.create({
   container: {
     flex: 1,
@@ -103,6 +105,55 @@ const AppStyles = StyleSheet.create({
     marginTop: Spacing.small,
     textAlign: 'center',
   },
+  modalContainer: {
+    flex: 1,
+    justifyContent: 'center',
+    alignItems: 'center',
+    backgroundColor: 'rgba(0,0,0,0.5)',
+    padding: Spacing.large,
+  },
+  modalTitle: {
+    fontSize: FontSize.large,
+    fontWeight: 'bold',
+    marginBottom: Spacing.medium,
+    color: '#fff',
+  },
+  modalInput: {
+    width: '100%',
+    backgroundColor: '#fff',
+    borderRadius: 8,
+    padding: Spacing.medium,
+    marginBottom: Spacing.medium,
+    fontSize: FontSize.medium,
+    color: Colors.text,
+    borderWidth: 1,
+    borderColor: Colors.border,
+  },
+  modalButton: {
+    backgroundColor: Colors.primary,
+    borderRadius: 8,
+    paddingVertical: Spacing.medium,
+    paddingHorizontal: Spacing.large,
+    marginBottom: Spacing.small,
+    alignItems: 'center',
+  },
+  modalButtonText: {
+    color: '#fff',
+    fontSize: FontSize.medium,
+    fontWeight: 'bold',
+  },
+  modalCloseButton: {
+    backgroundColor: Colors.error,
+    borderRadius: 8,
+    paddingVertical: Spacing.medium,
+    paddingHorizontal: Spacing.large,
+    alignItems: 'center',
+  },
+  modalCloseButtonText: {
+    color: '#fff',
+    fontSize: FontSize.medium,
+    fontWeight: 'bold',
+  },
 });
 
-export {Colors, Spacing, FontSize, AppStyles};
+export {AppStyles};

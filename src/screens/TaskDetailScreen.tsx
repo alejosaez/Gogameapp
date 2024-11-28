@@ -1,73 +1,58 @@
-// import React, {useEffect, useState} from 'react';
-// import {View, Text, TextInput, Button, StyleSheet} from 'react-native';
-// import {useRoute} from '@react-navigation/native';
-// import {useSelector, useDispatch} from 'react-redux';
-// import {fetchTaskById, updateTask} from '../../redux/slices/tasksSlice';
+// import React, {useState} from 'react';
+// import {View, Text, TextInput, TouchableOpacity} from 'react-native';
+// import {AppStyles} from '../styles/AppStyles';
+// import {RouteProp, useNavigation} from '@react-navigation/native';
+// import {StackNavigationProp} from '@react-navigation/stack';
+// import {RootStackParamList} from '../navigation/RootStackParamList'; // Define tus rutas
 
-// const TasksDetailScreen = () => {
-//   const route = useRoute();
-//   const dispatch = useDispatch();
-//   const {taskId} = route.params; // Obtener el ID desde los parámetros
-//   const task = useSelector(state =>
-//     state.tasks.items.find(item => item.id === taskId),
-//   );
+// type TaskDetailScreenRouteProp = RouteProp<RootStackParamList, 'TaskDetail'>;
+// type TaskDetailScreenNavigationProp = StackNavigationProp<
+//   RootStackParamList,
+//   'TaskDetail'
+// >;
 
-//   const [title, setTitle] = useState('');
-//   const [content, setContent] = useState('');
+// interface TaskDetailScreenProps {
+//   route: TaskDetailScreenRouteProp;
+//   navigation: TaskDetailScreenNavigationProp;
+// }
 
-//   useEffect(() => {
-//     if (!task) {
-//       // Fetch del backend si no está en el estado global
-//       dispatch(fetchTaskById(taskId));
-//     } else {
-//       // Cargar los datos de la tarea
-//       setTitle(task.title);
-//       setContent(task.content);
-//     }
-//   }, [task, taskId]);
+// const TaskDetailScreen: React.FC<TaskDetailScreenProps> = ({route}) => {
+//   const {task} = route.params;
+//   const [title, setTitle] = useState(task.title);
+//   const [content, setContent] = useState(task.content);
 
 //   const handleSave = () => {
-//     dispatch(updateTask({id: taskId, title, content}));
-//     // Navegar de regreso o mostrar confirmación
+//     console.log('Tarea actualizada:', {id: task.id, title, content});
+//     // Aquí podrías disparar una acción Redux para actualizar la tarea
+//     // navigation.goBack(); // Vuelve a la pantalla anterior
 //   };
 
-//   if (!task) {
-//     return <Text>Loading...</Text>; // Renderizar un estado de carga
-//   }
-
 //   return (
-//     <View style={styles.container}>
-//       <Text style={styles.label}>Título</Text>
+//     <View style={AppStyles.container}>
+//       <Text style={AppStyles.modalTitle}>Editar Tarea</Text>
 //       <TextInput
-//         style={styles.input}
+//         style={AppStyles.modalInput}
+//         placeholder="Título"
 //         value={title}
 //         onChangeText={setTitle}
-//         placeholder="Edita el título"
 //       />
-//       <Text style={styles.label}>Contenido</Text>
 //       <TextInput
-//         style={[styles.input, styles.content]}
+//         style={AppStyles.modalInput}
+//         placeholder="Contenido"
 //         value={content}
 //         onChangeText={setContent}
-//         placeholder="Edita el contenido"
 //         multiline
 //       />
-//       <Button title="Guardar" onPress={handleSave} />
+//       <TouchableOpacity style={AppStyles.modalButton} onPress={handleSave}>
+//         <Text style={AppStyles.modalButtonText}>Guardar Cambios</Text>
+//       </TouchableOpacity>
+//       <TouchableOpacity
+//         style={AppStyles.modalCloseButton}
+//         onPress={() => navigation.goBack()}>
+//         <Text style={AppStyles.modalCloseButtonText}>Cancelar</Text>
+//       </TouchableOpacity>
 //     </View>
 //   );
 // };
 
-// const styles = StyleSheet.create({
-//   container: {flex: 1, padding: 16},
-//   label: {fontSize: 16, marginBottom: 8},
-//   input: {
-//     borderWidth: 1,
-//     borderColor: '#ccc',
-//     padding: 8,
-//     marginBottom: 16,
-//     borderRadius: 4,
-//   },
-//   content: {height: 100, textAlignVertical: 'top'},
-// });
-
-// export default TasksDetailScreen;
+// export default TaskDetailScreen;

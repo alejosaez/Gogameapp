@@ -3,25 +3,23 @@ import {View, Text, TouchableOpacity, TextInput, FlatList} from 'react-native';
 import {AppStyles} from '../styles/AppStyles';
 import {useAppDispatch, useAppSelector} from '../redux/reduxHook';
 import {RootState} from '../redux/store';
-import {fetchTasks} from '../redux/actions/tasksActions';
+import {fetchTasks, addTask} from '../redux/actions/tasksActions';
+import CreateTaskModal from '../components/CreateTasksModal'; // Importa el componente
 
 const HomeScreen = () => {
   const dispatch = useAppDispatch();
   const alltasks = useAppSelector((state: RootState) => state.tasks.allTasks);
 
   const [searchText, setSearchText] = useState('');
+  const [isModalVisible, setIsModalVisible] = useState(false);
 
   useEffect(() => {
     dispatch(fetchTasks());
   }, [dispatch]);
 
-  const handleCreateTask = () => {
-    console.log('Crear nueva tarea');
+  const handleCreateTask = (title: string) => {
+    dispatch(addTask({title}));
   };
-
-  const filteredTasks = alltasks.filter(task =>
-    task.title.toLowerCase().includes(searchText.toLowerCase()),
-  );
 
   return (
     <View style={AppStyles.container}>
@@ -33,7 +31,9 @@ const HomeScreen = () => {
       />
 
       <FlatList
-        data={filteredTasks}
+        data={alltasks.filter(task =>
+          task.title.toLowerCase().includes(searchText.toLowerCase()),
+        )}
         keyExtractor={item => item.id.toString()}
         renderItem={({item}) => (
           <View style={AppStyles.taskItem}>
@@ -44,11 +44,19 @@ const HomeScreen = () => {
           <Text style={AppStyles.noTasks}>No hay tareas</Text>
         }
       />
+
       <TouchableOpacity
         style={AppStyles.createButton}
-        onPress={handleCreateTask}>
+        onPress={() => setIsModalVisible(true)}>
         <Text style={AppStyles.createButtonText}>Crear Nueva Tarea</Text>
       </TouchableOpacity>
+
+      {/* Componente de Modal */}
+      <CreateTaskModal
+        isVisible={isModalVisible}
+        onClose={() => setIsModalVisible(false)}
+        onCreate={handleCreateTask}
+      />
     </View>
   );
 };
