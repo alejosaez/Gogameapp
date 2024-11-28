@@ -1,20 +1,25 @@
-import React, {useState} from 'react';
+import React, {useEffect, useState} from 'react';
 import {View, Text, TouchableOpacity, TextInput, FlatList} from 'react-native';
 import {AppStyles} from '../styles/AppStyles';
+import {useAppDispatch, useAppSelector} from '../redux/reduxHook';
+import {RootState} from '../redux/store';
+import {fetchTasks} from '../redux/actions/tasksActions';
 
 const HomeScreen = () => {
+  const dispatch = useAppDispatch();
+  const alltasks = useAppSelector((state: RootState) => state.tasks.allTasks);
+
   const [searchText, setSearchText] = useState('');
-// eslint-disable-next-line @typescript-eslint/no-unused-vars
-const [tasks, setTasks] = useState([
-    { id: '1', title: 'Comprar leche' },
-    { id: '2', title: 'Terminar proyecto' },
-    { id: '3', title: 'Leer un libro' },
-  ]);
+
+  useEffect(() => {
+    dispatch(fetchTasks());
+  }, [dispatch]);
+
   const handleCreateTask = () => {
     console.log('Crear nueva tarea');
   };
 
-  const filteredTasks = tasks.filter(task =>
+  const filteredTasks = alltasks.filter(task =>
     task.title.toLowerCase().includes(searchText.toLowerCase()),
   );
 
@@ -29,7 +34,7 @@ const [tasks, setTasks] = useState([
 
       <FlatList
         data={filteredTasks}
-        keyExtractor={item => item.id}
+        keyExtractor={item => item.id.toString()}
         renderItem={({item}) => (
           <View style={AppStyles.taskItem}>
             <Text style={AppStyles.taskTitle}>{item.title}</Text>
@@ -39,7 +44,6 @@ const [tasks, setTasks] = useState([
           <Text style={AppStyles.noTasks}>No hay tareas</Text>
         }
       />
-
       <TouchableOpacity
         style={AppStyles.createButton}
         onPress={handleCreateTask}>
