@@ -1,6 +1,5 @@
-import {StyleSheet} from 'react-native';
+import {StyleSheet, ViewStyle, TextStyle} from 'react-native';
 
-// Definimos las constantes necesarias dentro del mismo archivo
 const Colors = {
   primary: '#3498db',
   secondary: '#2ecc71',
@@ -19,44 +18,62 @@ const Spacing = {
   xlarge: 32,
 };
 
-const FontSize = {
-  small: 12,
-  medium: 16,
-  large: 20,
-  xlarge: 24,
+const Typography = {
+  h1: {fontSize: 32, fontWeight: '700' as TextStyle['fontWeight']},
+  h2: {fontSize: 24, fontWeight: '700' as TextStyle['fontWeight']},
+  body: {fontSize: 16, fontWeight: '400' as TextStyle['fontWeight']},
+  small: {fontSize: 12, fontWeight: '400' as TextStyle['fontWeight']},
 };
 
-// Definimos los estilos utilizando las constantes
-const AppStyles = StyleSheet.create({
+interface AppStylesType {
+  container: ViewStyle;
+  text: TextStyle;
+  button: ViewStyle;
+  buttonText: TextStyle;
+  searchBar: TextStyle;
+  taskItem: ViewStyle;
+  taskTitle: TextStyle;
+  emptyStateText: TextStyle;
+  createButton: ViewStyle;
+  createButtonText: TextStyle;
+  errorText: TextStyle;
+  saveButton: ViewStyle;
+  saveButtonText: TextStyle;
+  titleInput: TextStyle;
+  editor: ViewStyle;
+  editorContainer: ViewStyle;
+}
+
+const AppStyles = StyleSheet.create<AppStylesType>({
   container: {
     flex: 1,
     backgroundColor: Colors.background,
     padding: Spacing.medium,
   },
   text: {
-    fontSize: FontSize.medium,
+    ...Typography.body,
     color: Colors.text,
   },
   button: {
-    backgroundColor: Colors.primary,
-    paddingVertical: Spacing.medium,
-    paddingHorizontal: Spacing.large,
     borderRadius: 8,
     alignItems: 'center',
     justifyContent: 'center',
+    paddingVertical: Spacing.medium,
+    backgroundColor: Colors.primary,
+    paddingHorizontal: Spacing.large,
   },
   buttonText: {
+    ...Typography.body,
     color: '#fff',
-    fontSize: FontSize.medium,
+    fontWeight: '700',
     textAlign: 'center',
-    fontWeight: 'bold',
   },
   searchBar: {
     height: 50,
     backgroundColor: '#fff',
     borderRadius: 8,
     paddingHorizontal: Spacing.medium,
-    fontSize: FontSize.medium,
+    ...Typography.body,
     borderColor: Colors.border,
     borderWidth: 1,
     marginBottom: Spacing.medium,
@@ -71,13 +88,13 @@ const AppStyles = StyleSheet.create({
     borderColor: Colors.border,
   },
   taskTitle: {
-    fontSize: FontSize.medium,
+    ...Typography.body,
     color: Colors.text,
   },
-  noTasks: {
+  emptyStateText: {
     textAlign: 'center',
     color: Colors.placeholder,
-    fontSize: FontSize.medium,
+    ...Typography.body,
     marginTop: Spacing.medium,
   },
   createButton: {
@@ -92,16 +109,17 @@ const AppStyles = StyleSheet.create({
     shadowOffset: {width: 0, height: 2},
     shadowOpacity: 0.3,
     shadowRadius: 3,
+    alignItems: 'center',
+    justifyContent: 'center',
   },
   createButtonText: {
+    ...Typography.h2,
     color: '#fff',
-    fontSize: FontSize.large,
     textAlign: 'center',
-    fontWeight: 'bold',
   },
   errorText: {
+    ...Typography.small,
     color: Colors.error,
-    fontSize: FontSize.small,
     marginTop: Spacing.small,
     textAlign: 'center',
   },
@@ -113,10 +131,9 @@ const AppStyles = StyleSheet.create({
     padding: Spacing.large,
   },
   modalTitle: {
-    fontSize: FontSize.large,
-    fontWeight: 'bold',
-    marginBottom: Spacing.medium,
+    ...Typography.h2,
     color: '#fff',
+    marginBottom: Spacing.medium,
   },
   modalInput: {
     width: '100%',
@@ -124,36 +141,70 @@ const AppStyles = StyleSheet.create({
     borderRadius: 8,
     padding: Spacing.medium,
     marginBottom: Spacing.medium,
-    fontSize: FontSize.medium,
+    ...Typography.body,
     color: Colors.text,
     borderWidth: 1,
     borderColor: Colors.border,
   },
   modalButton: {
-    backgroundColor: Colors.primary,
     borderRadius: 8,
-    paddingVertical: Spacing.medium,
-    paddingHorizontal: Spacing.large,
-    marginBottom: Spacing.small,
     alignItems: 'center',
+    justifyContent: 'center',
+    backgroundColor: Colors.primary,
+    paddingHorizontal: Spacing.large,
+    paddingVertical: Spacing.medium,
+    marginBottom: Spacing.small,
   },
   modalButtonText: {
+    ...Typography.body,
     color: '#fff',
-    fontSize: FontSize.medium,
-    fontWeight: 'bold',
+    fontWeight: '700',
   },
   modalCloseButton: {
-    backgroundColor: Colors.error,
     borderRadius: 8,
-    paddingVertical: Spacing.medium,
-    paddingHorizontal: Spacing.large,
     alignItems: 'center',
+    justifyContent: 'center',
+    backgroundColor: Colors.error,
+    paddingHorizontal: Spacing.large,
+    paddingVertical: Spacing.medium,
   },
   modalCloseButtonText: {
+    ...Typography.body,
     color: '#fff',
-    fontSize: FontSize.medium,
-    fontWeight: 'bold',
+    fontWeight: '700',
+  },
+  titleInput: {
+    ...Typography.h2,
+    color: Colors.text,
+    borderBottomWidth: 1,
+    borderBottomColor: Colors.border,
+    marginBottom: Spacing.small,
+    paddingVertical: 5,
+  },
+  editor: {
+    flex: 1,
+    backgroundColor: '#f9f9f9',
+    padding: 10,
+    borderRadius: 8,
+    borderWidth: 1,
+    borderColor: '#ddd',
+  },
+  editorContainer: {
+    flex: 1,
+  },
+  saveButton: {
+    borderRadius: 8,
+    alignItems: 'center',
+    justifyContent: 'center',
+    backgroundColor: Colors.primary,
+    marginTop: Spacing.medium,
+    paddingVertical: Spacing.medium,
+  },
+  saveButtonText: {
+    ...Typography.body,
+    color: '#fff',
+    fontWeight: '700',
   },
 });
 
-export {AppStyles};
+export {AppStyles, Colors, Spacing, Typography};

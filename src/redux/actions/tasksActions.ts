@@ -6,8 +6,8 @@ import {CreateTaskPayload, Task} from '../../types/types';
 
 const BASE_URL =
   Platform.OS === 'android'
-    ? 'http://10.0.2.2:3000/tasks'
-    : 'http://localhost:3000/tasks';
+    ? 'http:
+    : 'http:
 
 
 export const fetchTasks = createAsyncThunk<Task[]>(
@@ -28,14 +28,14 @@ export const addTask = createAsyncThunk<Task, CreateTaskPayload>(
 );
 
 
-export const updateTask = createAsyncThunk<Task, {id: number; title: string}>(
+export const updateTask = createAsyncThunk<Task, Task>(
   'tasks/updateTask',
-  async ({id, title}) => {
-    const response = await axios.put(`${BASE_URL}/${id}`, {title});
+  async (task) => {
+    const { id, ...data } = task; 
+    const response = await axios.put(`${BASE_URL}/${id}`, data);
     return response.data;
   },
 );
-
 
 export const deleteTask = createAsyncThunk<number, number>(
   'tasks/deleteTask',

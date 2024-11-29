@@ -1,58 +1,105 @@
-// import React, {useState} from 'react';
-// import {View, Text, TextInput, TouchableOpacity} from 'react-native';
-// import {AppStyles} from '../styles/AppStyles';
-// import {RouteProp, useNavigation} from '@react-navigation/native';
-// import {StackNavigationProp} from '@react-navigation/stack';
-// import {RootStackParamList} from '../navigation/RootStackParamList'; // Define tus rutas
+import React, {useEffect, useState} from 'react';
+import {
+  View,
+  TextInput,
+  KeyboardAvoidingView,
+  Platform,
+  TouchableOpacity,
+  Text,
+} from 'react-native';
+import {useAppSelector, useAppDispatch} from '../redux/reduxHook';
+import {RootState} from '../redux/store';
+import {updateTask} from '../redux/actions/tasksActions';
+import {AppStyles} from '../styles/AppStyles';
+import {RouteProp} from '@react-navigation/native';
+import {StackNavigationProp} from '@react-navigation/stack';
+import {RootStackParamList} from '../../App';
 
-// type TaskDetailScreenRouteProp = RouteProp<RootStackParamList, 'TaskDetail'>;
-// type TaskDetailScreenNavigationProp = StackNavigationProp<
-//   RootStackParamList,
-//   'TaskDetail'
-// >;
 
-// interface TaskDetailScreenProps {
-//   route: TaskDetailScreenRouteProp;
-//   navigation: TaskDetailScreenNavigationProp;
-// }
+type TaskDetailScreenRouteProp = RouteProp<RootStackParamList, 'TaskDetail'>;
+type TaskDetailScreenNavigationProp = StackNavigationProp<
+  RootStackParamList,
+  'TaskDetail'
+>;
 
-// const TaskDetailScreen: React.FC<TaskDetailScreenProps> = ({route}) => {
-//   const {task} = route.params;
-//   const [title, setTitle] = useState(task.title);
-//   const [content, setContent] = useState(task.content);
+interface TaskDetailScreenProps {
+  route: TaskDetailScreenRouteProp;
+  navigation: TaskDetailScreenNavigationProp;
+}
 
-//   const handleSave = () => {
-//     console.log('Tarea actualizada:', {id: task.id, title, content});
-//     // Aquí podrías disparar una acción Redux para actualizar la tarea
-//     // navigation.goBack(); // Vuelve a la pantalla anterior
-//   };
+const TaskDetailScreen: React.FC<TaskDetailScreenProps> = ({
+  route,
+  navigation,
+}) => {
+  const {taskId} = route.params;
+  const dispatch = useAppDispatch();
 
-//   return (
-//     <View style={AppStyles.container}>
-//       <Text style={AppStyles.modalTitle}>Editar Tarea</Text>
-//       <TextInput
-//         style={AppStyles.modalInput}
-//         placeholder="Título"
-//         value={title}
-//         onChangeText={setTitle}
-//       />
-//       <TextInput
-//         style={AppStyles.modalInput}
-//         placeholder="Contenido"
-//         value={content}
-//         onChangeText={setContent}
-//         multiline
-//       />
-//       <TouchableOpacity style={AppStyles.modalButton} onPress={handleSave}>
-//         <Text style={AppStyles.modalButtonText}>Guardar Cambios</Text>
-//       </TouchableOpacity>
-//       <TouchableOpacity
-//         style={AppStyles.modalCloseButton}
-//         onPress={() => navigation.goBack()}>
-//         <Text style={AppStyles.modalCloseButtonText}>Cancelar</Text>
-//       </TouchableOpacity>
-//     </View>
-//   );
-// };
+  const taskData = useAppSelector(
+    (state: RootState) => state.tasks.allTasks.find(task => task.id === taskId), 
+  );
 
-// export default TaskDetailScreen;
+  const [title, setTitle] = useState(taskData?.title || '');
+  const [content, setContent] = useState(taskData?.content || '');
+
+  useEffect(() => {
+    if (taskData) {
+      setTitle(taskData.title);
+      setContent(taskData.content);
+    }
+  }, [taskData]);
+
+  const handleSave = () => {
+    if (taskData) {
+      dispatch(updateTask({id: taskData.id, title, content}))
+        .unwrap()
+        .then(() => {
+          console.log('Tarea actualizada exitosamente.');
+          navigation.goBack(); 
+        })
+        .catch(error => {
+          console.error('Error al actualizar la tarea:', error);
+        });
+    }
+  };
+
+  if (!taskData) {
+    console.error('Tarea no encontrada en Redux. ID:', taskId);
+    return (
+      <View style={AppStyles.container}>
+        <Text style={AppStyles.errorText}>
+          La tarea no existe o no se encuentra en el estado.
+        </Text>
+      </View>
+    );
+  }
+
+  return (
+    <View style={AppStyles.container}>
+      <TextInput
+        style={AppStyles.titleInput}
+        value={title}
+        onChangeText={setTitle}
+        placeholder="Título de la tarea"
+        placeholderTextColor="#999"
+      />
+      <KeyboardAvoidingView
+        behavior={Platform.OS === 'ios' ? 'padding' : 'height'}
+        style={AppStyles.editorContainer}>
+        <TextInput
+          style={[AppStyles.editor, {textAlignVertical: 'top'}]}
+          multiline
+          value={content}
+          onChangeText={setContent}
+          placeholder="Escribí el detalle de la tarea aquí..."
+          placeholderTextColor="#999"
+        />
+      </KeyboardAvoidingView>
+
+      <TouchableOpacity style={AppStyles.saveButton} onPress={handleSave}>
+        <Text style={AppStyles.saveButtonText}>Guardar Cambios</Text>
+      </TouchableOpacity>
+    </View>
+  );
+};
+
+export default TaskDetailScreen;

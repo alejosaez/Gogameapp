@@ -18,7 +18,7 @@ const CreateTaskModal: React.FC<CreateTaskModalProps> = ({
   const handleCreate = () => {
     if (taskTitle.trim()) {
       onCreate(taskTitle);
-      setTaskTitle(''); // Limpia el input después de crear la tarea
+      setTaskTitle(''); 
       onClose();
     }
   };

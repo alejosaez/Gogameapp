@@ -10,7 +10,11 @@ import {initialState, Task} from '../../types/types';
 const tasksSlice = createSlice({
   name: 'tasks',
   initialState,
-  reducers: {},
+  reducers: {
+    clearError: state => {
+      state.error = null;
+    },
+  },
   extraReducers: builder => {
     builder
       .addCase(fetchTasks.pending, state => {
@@ -42,5 +46,5 @@ const tasksSlice = createSlice({
       });
   },
 });
-
+export const { clearError } = tasksSlice.actions;
 export default tasksSlice.reducer;
