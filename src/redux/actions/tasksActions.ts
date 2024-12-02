@@ -3,12 +3,10 @@ import axios from 'axios';
 import {Platform} from 'react-native';
 import {CreateTaskPayload, Task} from '../../types/types';
 
-
 const BASE_URL =
   Platform.OS === 'android'
-    ? 'http:
-    : 'http:
-
+    ? 'http://10.0.2.2:3000/tasks' // Para emulador de Android
+    : 'http://localhost:3000/tasks'; // Para emulador de iOS
 
 export const fetchTasks = createAsyncThunk<Task[]>(
   'tasks/fetchTasks',
@@ -18,7 +16,6 @@ export const fetchTasks = createAsyncThunk<Task[]>(
   },
 );
 
-
 export const addTask = createAsyncThunk<Task, CreateTaskPayload>(
   'tasks/addTask',
   async task => {
@@ -27,11 +24,10 @@ export const addTask = createAsyncThunk<Task, CreateTaskPayload>(
   },
 );
 
-
 export const updateTask = createAsyncThunk<Task, Task>(
   'tasks/updateTask',
-  async (task) => {
-    const { id, ...data } = task; 
+  async task => {
+    const {id, ...data} = task;
     const response = await axios.put(`${BASE_URL}/${id}`, data);
     return response.data;
   },

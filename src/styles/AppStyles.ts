@@ -42,6 +42,7 @@ interface AppStylesType {
   titleInput: TextStyle;
   editor: ViewStyle;
   editorContainer: ViewStyle;
+  taskItemContainer: ViewStyle;
 }
 
 const AppStyles = StyleSheet.create<AppStylesType>({
@@ -204,6 +205,14 @@ const AppStyles = StyleSheet.create<AppStylesType>({
     ...Typography.body,
     color: '#fff',
     fontWeight: '700',
+  },
+  taskItemContainer: {
+    flexDirection: 'row',
+    alignItems: 'center',
+    justifyContent: 'space-between',
+    padding: 10,
+    borderBottomWidth: 1,
+    borderBottomColor: '#ccc',
   },
 });
 

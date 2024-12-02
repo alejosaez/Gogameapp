@@ -3,12 +3,12 @@ import {View, Text, TouchableOpacity, TextInput, FlatList} from 'react-native';
 import {AppStyles} from '../styles/AppStyles';
 import {useAppDispatch, useAppSelector} from '../redux/reduxHook';
 import {RootState} from '../redux/store';
-import {fetchTasks, addTask} from '../redux/actions/tasksActions';
+import {fetchTasks, addTask, deleteTask} from '../redux/actions/tasksActions';
 import CreateTaskModal from '../components/CreateTasksModal';
 import {useNavigation} from '@react-navigation/native';
 import {StackNavigationProp} from '@react-navigation/stack';
 import {RootStackParamList} from '../../App';
-
+import TrashIcon from '../components/TrashIcon'; // Ícono de basura
 
 type HomeScreenNavigationProp = StackNavigationProp<RootStackParamList, 'Home'>;
 
@@ -20,19 +20,22 @@ const HomeScreen: React.FC = () => {
   const [searchText, setSearchText] = useState('');
   const [isModalVisible, setIsModalVisible] = useState(false);
 
-  
+  // Cargar tareas al montar el componente
   useEffect(() => {
     dispatch(fetchTasks());
   }, [dispatch]);
 
-  
   const handleCreateTask = (title: string) => {
     dispatch(addTask({title}));
   };
 
+  const handleDeleteTask = (taskId: number) => {
+    dispatch(deleteTask(taskId));
+  };
+
   return (
     <View style={AppStyles.container}>
-      {}
+      {/* Barra de búsqueda */}
       <TextInput
         style={AppStyles.searchBar}
         placeholder="Buscar tareas..."
@@ -40,35 +43,42 @@ const HomeScreen: React.FC = () => {
         onChangeText={setSearchText}
       />
 
-      {}
+      {/* Lista de tareas */}
       <FlatList
         data={alltasks.filter(task =>
           task.title.toLowerCase().includes(searchText.toLowerCase()),
         )}
         keyExtractor={item => item.id.toString()}
         renderItem={({item}) => (
-          <TouchableOpacity
-            onPress={() => {
-              navigation.navigate('TaskDetail', {taskId: item.id}); 
-            }}>
-            <View style={AppStyles.taskItem}>
+          <View style={AppStyles.taskItemContainer}>
+            {/* Navegar a los detalles de la tarea */}
+            <TouchableOpacity
+              onPress={() => {
+                navigation.navigate('TaskDetail', {taskId: item.id});
+              }}
+              style={AppStyles.taskItem}>
               <Text style={AppStyles.taskTitle}>{item.title}</Text>
-            </View>
-          </TouchableOpacity>
+            </TouchableOpacity>
+
+            {/* Ícono de basura para eliminar */}
+            <TouchableOpacity onPress={() => handleDeleteTask(item.id)}>
+              <TrashIcon />
+            </TouchableOpacity>
+          </View>
         )}
         ListEmptyComponent={
-          <Text style={AppStyles.noTasks}>No hay tareas</Text>
+          <Text style={AppStyles.emptyStateText}>No hay tareas</Text>
         }
       />
 
-      {}
+      {/* Botón para abrir el modal de crear tarea */}
       <TouchableOpacity
         style={AppStyles.createButton}
         onPress={() => setIsModalVisible(true)}>
         <Text style={AppStyles.createButtonText}>Crear Nueva Tarea</Text>
       </TouchableOpacity>
 
-      {}
+      {/* Modal para crear tarea */}
       <CreateTaskModal
         isVisible={isModalVisible}
         onClose={() => setIsModalVisible(false)}
