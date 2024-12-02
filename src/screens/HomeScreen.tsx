@@ -9,6 +9,7 @@ import {useNavigation} from '@react-navigation/native';
 import {StackNavigationProp} from '@react-navigation/stack';
 import {RootStackParamList} from '../../App';
 import TrashIcon from '../components/TrashIcon'; // Ícono de basura
+import AddTaskIcon from '../components/AddTaskIcon';
 
 type HomeScreenNavigationProp = StackNavigationProp<RootStackParamList, 'Home'>;
 
@@ -35,7 +36,6 @@ const HomeScreen: React.FC = () => {
 
   return (
     <View style={AppStyles.container}>
-      {/* Barra de búsqueda */}
       <TextInput
         style={AppStyles.searchBar}
         placeholder="Buscar tareas..."
@@ -71,14 +71,12 @@ const HomeScreen: React.FC = () => {
         }
       />
 
-      {/* Botón para abrir el modal de crear tarea */}
       <TouchableOpacity
         style={AppStyles.createButton}
         onPress={() => setIsModalVisible(true)}>
-        <Text style={AppStyles.createButtonText}>Crear Nueva Tarea</Text>
+        <AddTaskIcon />
       </TouchableOpacity>
 
-      {/* Modal para crear tarea */}
       <CreateTaskModal
         isVisible={isModalVisible}
         onClose={() => setIsModalVisible(false)}

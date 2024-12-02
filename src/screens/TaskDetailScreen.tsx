@@ -15,7 +15,6 @@ import {RouteProp} from '@react-navigation/native';
 import {StackNavigationProp} from '@react-navigation/stack';
 import {RootStackParamList} from '../../App';
 
-
 type TaskDetailScreenRouteProp = RouteProp<RootStackParamList, 'TaskDetail'>;
 type TaskDetailScreenNavigationProp = StackNavigationProp<
   RootStackParamList,
@@ -34,8 +33,8 @@ const TaskDetailScreen: React.FC<TaskDetailScreenProps> = ({
   const {taskId} = route.params;
   const dispatch = useAppDispatch();
 
-  const taskData = useAppSelector(
-    (state: RootState) => state.tasks.allTasks.find(task => task.id === taskId), 
+  const taskData = useAppSelector((state: RootState) =>
+    state.tasks.allTasks.find(task => task.id === taskId),
   );
 
   const [title, setTitle] = useState(taskData?.title || '');
@@ -54,7 +53,7 @@ const TaskDetailScreen: React.FC<TaskDetailScreenProps> = ({
         .unwrap()
         .then(() => {
           console.log('Tarea actualizada exitosamente.');
-          navigation.goBack(); 
+          navigation.goBack();
         })
         .catch(error => {
           console.error('Error al actualizar la tarea:', error);

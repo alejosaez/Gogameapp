@@ -18,7 +18,7 @@ const CreateTaskModal: React.FC<CreateTaskModalProps> = ({
   const handleCreate = () => {
     if (taskTitle.trim()) {
       onCreate(taskTitle);
-      setTaskTitle(''); 
+      setTaskTitle('');
       onClose();
     }
   };
