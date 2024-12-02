@@ -8,7 +8,7 @@ import CreateTaskModal from '../components/CreateTasksModal';
 import {useNavigation} from '@react-navigation/native';
 import {StackNavigationProp} from '@react-navigation/stack';
 import {RootStackParamList} from '../../App';
-import TrashIcon from '../components/TrashIcon'; // Ícono de basura
+import TrashIcon from '../components/TrashIcon'; 
 import AddTaskIcon from '../components/AddTaskIcon';
 
 type HomeScreenNavigationProp = StackNavigationProp<RootStackParamList, 'Home'>;
@@ -21,7 +21,7 @@ const HomeScreen: React.FC = () => {
   const [searchText, setSearchText] = useState('');
   const [isModalVisible, setIsModalVisible] = useState(false);
 
-  // Cargar tareas al montar el componente
+  
   useEffect(() => {
     dispatch(fetchTasks());
   }, [dispatch]);
@@ -43,7 +43,7 @@ const HomeScreen: React.FC = () => {
         onChangeText={setSearchText}
       />
 
-      {/* Lista de tareas */}
+      {}
       <FlatList
         data={alltasks.filter(task =>
           task.title.toLowerCase().includes(searchText.toLowerCase()),
@@ -51,7 +51,7 @@ const HomeScreen: React.FC = () => {
         keyExtractor={item => item.id.toString()}
         renderItem={({item}) => (
           <View style={AppStyles.taskItemContainer}>
-            {/* Navegar a los detalles de la tarea */}
+            {}
             <TouchableOpacity
               onPress={() => {
                 navigation.navigate('TaskDetail', {taskId: item.id});
@@ -60,7 +60,7 @@ const HomeScreen: React.FC = () => {
               <Text style={AppStyles.taskTitle}>{item.title}</Text>
             </TouchableOpacity>
 
-            {/* Ícono de basura para eliminar */}
+            {}
             <TouchableOpacity onPress={() => handleDeleteTask(item.id)}>
               <TrashIcon />
             </TouchableOpacity>
