@@ -10,7 +10,7 @@ import {
 import {useAppSelector, useAppDispatch} from '../redux/reduxHook';
 import {RootState} from '../redux/store';
 import {updateTask} from '../redux/actions/tasksActions';
-import {AppStyles} from '../styles/AppStyles';
+import {createAppStyles, lightColors, darkColors} from '../styles/AppStyles'; 
 import {RouteProp} from '@react-navigation/native';
 import {StackNavigationProp} from '@react-navigation/stack';
 import {RootStackParamList} from '../../App';
@@ -32,6 +32,11 @@ const TaskDetailScreen: React.FC<TaskDetailScreenProps> = ({
 }) => {
   const {taskId} = route.params;
   const dispatch = useAppDispatch();
+
+  
+  const theme = useAppSelector((state: RootState) => state.theme.theme);
+  const currentColors = theme === 'dark' ? darkColors : lightColors;
+  const styles = createAppStyles(currentColors); 
 
   const taskData = useAppSelector((state: RootState) =>
     state.tasks.allTasks.find(task => task.id === taskId),
@@ -64,8 +69,8 @@ const TaskDetailScreen: React.FC<TaskDetailScreenProps> = ({
   if (!taskData) {
     console.error('Tarea no encontrada en Redux. ID:', taskId);
     return (
-      <View style={AppStyles.container}>
-        <Text style={AppStyles.errorText}>
+      <View style={styles.container}>
+        <Text style={styles.errorText}>
           La tarea no existe o no se encuentra en el estado.
         </Text>
       </View>
@@ -73,9 +78,9 @@ const TaskDetailScreen: React.FC<TaskDetailScreenProps> = ({
   }
 
   return (
-    <View style={AppStyles.container}>
+    <View style={styles.container}>
       <TextInput
-        style={AppStyles.titleInput}
+        style={styles.titleInput}
         value={title}
         onChangeText={setTitle}
         placeholder="Título de la tarea"
@@ -83,9 +88,9 @@ const TaskDetailScreen: React.FC<TaskDetailScreenProps> = ({
       />
       <KeyboardAvoidingView
         behavior={Platform.OS === 'ios' ? 'padding' : 'height'}
-        style={AppStyles.editorContainer}>
+        style={styles.editorContainer}>
         <TextInput
-          style={[AppStyles.editor, {textAlignVertical: 'top'}]}
+          style={styles.editor} 
           multiline
           value={content}
           onChangeText={setContent}
@@ -94,8 +99,8 @@ const TaskDetailScreen: React.FC<TaskDetailScreenProps> = ({
         />
       </KeyboardAvoidingView>
 
-      <TouchableOpacity style={AppStyles.saveButton} onPress={handleSave}>
-        <Text style={AppStyles.saveButtonText}>Guardar Cambios</Text>
+      <TouchableOpacity style={styles.saveButton} onPress={handleSave}>
+        <Text style={styles.saveButtonText}>Guardar Cambios</Text>
       </TouchableOpacity>
     </View>
   );

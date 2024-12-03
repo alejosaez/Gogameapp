@@ -1,6 +1,7 @@
 import React, {useState} from 'react';
 import {View, Text, TextInput, TouchableOpacity, Modal} from 'react-native';
-import {AppStyles} from '../styles/AppStyles';
+import {useAppSelector} from '../redux/reduxHook'; 
+import {createAppStyles, lightColors, darkColors} from '../styles/AppStyles'; 
 
 interface CreateTaskModalProps {
   isVisible: boolean;
@@ -14,6 +15,11 @@ const CreateTaskModal: React.FC<CreateTaskModalProps> = ({
   onCreate,
 }) => {
   const [taskTitle, setTaskTitle] = useState('');
+
+  
+  const theme = useAppSelector(state => state.theme.theme);
+  const currentColors = theme === 'dark' ? darkColors : lightColors; 
+  const styles = createAppStyles(currentColors); 
 
   const handleCreate = () => {
     if (taskTitle.trim()) {
@@ -29,19 +35,19 @@ const CreateTaskModal: React.FC<CreateTaskModalProps> = ({
       transparent={true}
       visible={isVisible}
       onRequestClose={onClose}>
-      <View style={AppStyles.modalContainer}>
-        <Text style={AppStyles.modalTitle}>Crear Tarea</Text>
+      <View style={styles.modalContainer}>
+        <Text style={styles.modalTitle}>Crear Tarea</Text>
         <TextInput
-          style={AppStyles.modalInput}
+          style={styles.modalInput}
           placeholder="Título de la tarea"
           value={taskTitle}
           onChangeText={setTaskTitle}
         />
-        <TouchableOpacity style={AppStyles.modalButton} onPress={handleCreate}>
-          <Text style={AppStyles.modalButtonText}>Crear</Text>
+        <TouchableOpacity style={styles.modalButton} onPress={handleCreate}>
+          <Text style={styles.modalButtonText}>Crear</Text>
         </TouchableOpacity>
-        <TouchableOpacity style={AppStyles.modalCloseButton} onPress={onClose}>
-          <Text style={AppStyles.modalCloseButtonText}>Cerrar</Text>
+        <TouchableOpacity style={styles.modalCloseButton} onPress={onClose}>
+          <Text style={styles.modalCloseButtonText}>Cerrar</Text>
         </TouchableOpacity>
       </View>
     </Modal>
