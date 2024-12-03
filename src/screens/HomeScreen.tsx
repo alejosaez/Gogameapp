@@ -22,10 +22,8 @@ const HomeScreen: React.FC = () => {
   const [searchText, setSearchText] = useState('');
   const [isModalVisible, setIsModalVisible] = useState(false);
 
-  
   const currentColors = theme === 'dark' ? darkColors : lightColors;
 
-  
   const styles = createAppStyles(currentColors);
 
   useEffect(() => {
@@ -70,7 +68,7 @@ const HomeScreen: React.FC = () => {
           </View>
         )}
         ListEmptyComponent={
-          <Text style={styles.emptyStateText}>No hay tareas</Text> 
+          <Text style={styles.emptyStateText}>No hay tareas</Text>
         }
       />
       <TouchableOpacity

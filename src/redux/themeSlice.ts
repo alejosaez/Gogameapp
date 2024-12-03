@@ -1,4 +1,3 @@
-
 import {createSlice, PayloadAction} from '@reduxjs/toolkit';
 
 export type ThemeState = 'light' | 'dark';
@@ -8,7 +7,7 @@ interface ThemeSliceState {
 }
 
 const initialState: ThemeSliceState = {
-  theme: 'light', 
+  theme: 'light',
 };
 
 const themeSlice = createSlice({

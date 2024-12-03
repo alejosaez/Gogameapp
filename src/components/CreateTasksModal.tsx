@@ -1,7 +1,7 @@
 import React, {useState} from 'react';
 import {View, Text, TextInput, TouchableOpacity, Modal} from 'react-native';
-import {useAppSelector} from '../redux/reduxHook'; 
-import {createAppStyles, lightColors, darkColors} from '../styles/AppStyles'; 
+import {useAppSelector} from '../redux/reduxHook';
+import {createAppStyles, lightColors, darkColors} from '../styles/AppStyles';
 
 interface CreateTaskModalProps {
   isVisible: boolean;
@@ -16,10 +16,9 @@ const CreateTaskModal: React.FC<CreateTaskModalProps> = ({
 }) => {
   const [taskTitle, setTaskTitle] = useState('');
 
-  
   const theme = useAppSelector(state => state.theme.theme);
-  const currentColors = theme === 'dark' ? darkColors : lightColors; 
-  const styles = createAppStyles(currentColors); 
+  const currentColors = theme === 'dark' ? darkColors : lightColors;
+  const styles = createAppStyles(currentColors);
 
   const handleCreate = () => {
     if (taskTitle.trim()) {
