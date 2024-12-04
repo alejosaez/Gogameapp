@@ -1,5 +1,5 @@
 import React, {useEffect, useState} from 'react';
-import {View, Text, TouchableOpacity, TextInput, FlatList} from 'react-native';
+import {View, TextInput, FlatList, TouchableOpacity, Text} from 'react-native';
 import {useAppDispatch, useAppSelector} from '../redux/reduxHook';
 import {RootState} from '../redux/store';
 import {fetchTasks, addTask, deleteTask} from '../redux/actions/tasksActions';
@@ -7,8 +7,8 @@ import CreateTaskModal from '../components/CreateTasksModal';
 import {useNavigation} from '@react-navigation/native';
 import {StackNavigationProp} from '@react-navigation/stack';
 import {RootStackParamList} from '../../App';
-import TrashIcon from '../components/TrashIcon';
 import AddTaskIcon from '../components/AddTaskIcon';
+import CategoryItem from '../components/CategoryItem';
 import {createAppStyles, lightColors, darkColors} from '../styles/AppStyles';
 
 type HomeScreenNavigationProp = StackNavigationProp<RootStackParamList, 'Home'>;
@@ -23,7 +23,6 @@ const HomeScreen: React.FC = () => {
   const [isModalVisible, setIsModalVisible] = useState(false);
 
   const currentColors = theme === 'dark' ? darkColors : lightColors;
-
   const styles = createAppStyles(currentColors);
 
   useEffect(() => {
@@ -43,6 +42,7 @@ const HomeScreen: React.FC = () => {
       <TextInput
         style={styles.searchBar}
         placeholder="Buscar tareas..."
+        placeholderTextColor={currentColors.placeholder}
         value={searchText}
         onChangeText={setSearchText}
       />
@@ -52,21 +52,17 @@ const HomeScreen: React.FC = () => {
         )}
         keyExtractor={item => item.id.toString()}
         renderItem={({item}) => (
-          <View style={styles.taskItemContainer}>
-            <TouchableOpacity
-              onPress={() => {
-                navigation.navigate('TaskDetail', {
-                  taskId: item.id,
-                  taskTitle: item.title,
-                });
-              }}
-              style={styles.taskItem}>
-              <Text style={styles.taskTitle}>{item.title}</Text>
-            </TouchableOpacity>
-            <TouchableOpacity onPress={() => handleDeleteTask(item.id)}>
-              <TrashIcon />
-            </TouchableOpacity>
-          </View>
+          <CategoryItem
+            title={item.title}
+            content={item.content}
+            onPress={() => {
+              navigation.navigate('TaskDetail', {
+                taskId: item.id,
+                taskTitle: item.title,
+              });
+            }}
+            onDelete={() => handleDeleteTask(item.id)}
+          />
         )}
         ListEmptyComponent={
           <Text style={styles.emptyStateText}>No hay tareas</Text>
