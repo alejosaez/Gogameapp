@@ -61,6 +61,19 @@ interface AppStylesType {
   editor: ViewStyle;
   editorContainer: ViewStyle;
   taskItemContainer: ViewStyle;
+  modalOverlay: ViewStyle;
+  modalContent: ViewStyle;
+  label: TextStyle;
+  input: TextStyle;
+  categoryContainer: ViewStyle;
+  categoryButton: ViewStyle;
+  categorySelected: ViewStyle;
+  categoryText: TextStyle;
+  categoryTextSelected: TextStyle;
+  dateButton: ViewStyle;
+  dateText: TextStyle;
+  buttonGroup: ViewStyle;
+  iconSpacing: ViewStyle;
 }
 
 const createAppStyles = (Colors: typeof lightColors): AppStylesType =>
@@ -150,11 +163,6 @@ const createAppStyles = (Colors: typeof lightColors): AppStylesType =>
       backgroundColor: 'rgba(0,0,0,0.5)',
       padding: Spacing.large,
     },
-    modalTitle: {
-      ...Typography.h2,
-      color: '#fff',
-      marginBottom: Spacing.medium,
-    },
     modalInput: {
       width: '100%',
       backgroundColor: '#fff',
@@ -165,33 +173,6 @@ const createAppStyles = (Colors: typeof lightColors): AppStylesType =>
       color: Colors.text,
       borderWidth: 1,
       borderColor: Colors.border,
-    },
-    modalButton: {
-      borderRadius: 8,
-      alignItems: 'center',
-      justifyContent: 'center',
-      backgroundColor: Colors.primary,
-      paddingHorizontal: Spacing.large,
-      paddingVertical: Spacing.medium,
-      marginBottom: Spacing.small,
-    },
-    modalButtonText: {
-      ...Typography.body,
-      color: '#fff',
-      fontWeight: '700',
-    },
-    modalCloseButton: {
-      borderRadius: 8,
-      alignItems: 'center',
-      justifyContent: 'center',
-      backgroundColor: Colors.error,
-      paddingHorizontal: Spacing.large,
-      paddingVertical: Spacing.medium,
-    },
-    modalCloseButtonText: {
-      ...Typography.body,
-      color: '#fff',
-      fontWeight: '700',
     },
     titleInput: {
       ...Typography.h2,
@@ -232,6 +213,109 @@ const createAppStyles = (Colors: typeof lightColors): AppStylesType =>
       padding: 10,
       borderBottomWidth: 1,
       borderBottomColor: '#ccc',
+    },
+    
+    modalOverlay: {
+      flex: 1,
+      backgroundColor: 'rgba(0, 0, 0, 0.5)', 
+      justifyContent: 'center',
+      alignItems: 'center',
+    },
+    modalContent: {
+      width: '90%',
+      backgroundColor: Colors.background,
+      borderRadius: 20,
+      padding: 20,
+      shadowColor: '#000',
+      shadowOffset: {width: 0, height: 2},
+      shadowOpacity: 0.25,
+      shadowRadius: 4,
+      elevation: 5,
+    },
+    modalTitle: {
+      fontSize: 20,
+      fontWeight: 'bold',
+      color: Colors.text,
+      marginBottom: 10,
+    },
+    label: {
+      fontSize: 14,
+      fontWeight: '600',
+      color: Colors.text,
+      marginTop: 15,
+    },
+    input: {
+      borderWidth: 1,
+      borderColor: Colors.border,
+      borderRadius: 10,
+      padding: 10,
+      marginTop: 10,
+      color: Colors.text,
+    },
+    categoryContainer: {
+      flexDirection: 'row',
+      flexWrap: 'wrap',
+      marginTop: 10,
+    },
+    categoryButton: {
+      padding: 10,
+      borderRadius: 20,
+      borderWidth: 1,
+      borderColor: Colors.border,
+      marginRight: 10,
+      marginBottom: 10,
+    },
+    categorySelected: {
+      backgroundColor: Colors.primary,
+      borderColor: Colors.primary,
+    },
+    categoryText: {
+      fontSize: 12,
+      color: Colors.text,
+    },
+    categoryTextSelected: {
+      color: Colors.background,
+    },
+    dateButton: {
+      flexDirection: 'row',
+      alignItems: 'center',
+      padding: 10,
+      borderRadius: 10,
+      borderWidth: 1,
+      borderColor: Colors.border,
+      marginTop: 10,
+    },
+    dateText: {
+      marginLeft: 10,
+      color: Colors.text,
+    },
+    buttonGroup: {
+      flexDirection: 'row',
+      justifyContent: 'space-between',
+      marginTop: 20,
+    },
+    modalButton: {
+      backgroundColor: Colors.primary,
+      padding: 15,
+      borderRadius: 10,
+    },
+    modalButtonText: {
+      color: Colors.background,
+      fontWeight: '600',
+      textAlign: 'center',
+    },
+    modalCloseButton: {
+      backgroundColor: Colors.border,
+      padding: 15,
+      borderRadius: 10,
+    },
+    modalCloseButtonText: {
+      color: Colors.text,
+      fontWeight: '600',
+      textAlign: 'center',
+    },
+    iconSpacing: {
+      marginRight: 10,
     },
   });
 
