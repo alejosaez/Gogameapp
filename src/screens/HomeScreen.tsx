@@ -40,7 +40,6 @@ const HomeScreen: React.FC = () => {
 
   return (
     <View style={styles.container}>
-      {}
       <TextInput
         style={styles.searchBar}
         placeholder="Buscar tareas..."
@@ -56,10 +55,12 @@ const HomeScreen: React.FC = () => {
           <View style={styles.taskItemContainer}>
             <TouchableOpacity
               onPress={() => {
-                navigation.navigate('TaskDetail', {taskId: item.id});
+                navigation.navigate('TaskDetail', {
+                  taskId: item.id,
+                  taskTitle: item.title,
+                });
               }}
               style={styles.taskItem}>
-              {}
               <Text style={styles.taskTitle}>{item.title}</Text>
             </TouchableOpacity>
             <TouchableOpacity onPress={() => handleDeleteTask(item.id)}>

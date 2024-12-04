@@ -8,11 +8,11 @@ import {toggleTheme} from './src/redux/themeSlice';
 import HomeScreen from './src/screens/HomeScreen';
 import TaskDetailScreen from './src/screens/TaskDetailScreen';
 import {lightColors, darkColors} from './src/styles/AppStyles';
-import {View, Switch} from 'react-native';
+import {View, Switch, StyleSheet} from 'react-native';
 
 export type RootStackParamList = {
   Home: undefined;
-  TaskDetail: {taskId: number};
+  TaskDetail: {taskId: number; taskTitle: string}; // Agregamos `taskTitle` como parámetro
 };
 
 const Stack = createStackNavigator<RootStackParamList>();
@@ -21,11 +21,12 @@ const HeaderRightSwitch: React.FC<{theme: string; toggleTheme: () => void}> = ({
   theme,
   toggleTheme,
 }) => {
-  const styles = {
+  const styles = StyleSheet.create({
     headerRight: {
       marginRight: 10,
+      transform: [{scale: 0.7}], // Escala para reducir el tamaño del Switch
     },
-  };
+  });
 
   return (
     <View style={styles.headerRight}>
@@ -53,8 +54,20 @@ const App: React.FC = () => {
             />
           ),
         }}>
-        <Stack.Screen name="Home" component={HomeScreen} />
-        <Stack.Screen name="TaskDetail" component={TaskDetailScreen} />
+        {/* Cambia el título de la pantalla "Home" */}
+        <Stack.Screen
+          name="Home"
+          component={HomeScreen}
+          options={{title: 'Tasks'}}
+        />
+        {/* Cambia dinámicamente el título de la pantalla "TaskDetail" */}
+        <Stack.Screen
+          name="TaskDetail"
+          component={TaskDetailScreen}
+          options={({route}) => ({
+            title: route.params.taskTitle || 'Detalles de la tarea', // Usa el título de la tarea o un valor predeterminado
+          })}
+        />
       </Stack.Navigator>
     </NavigationContainer>
   );

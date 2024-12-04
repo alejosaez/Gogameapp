@@ -25,10 +25,9 @@ const TrashIcon: React.FC = () => {
 
   return (
     <Svg width={24} height={24} viewBox="0 0 24 24" style={styles.icon}>
-    
       <Path
         d="M3 6h18M10 11v6M14 11v6M5 6h14l-1.5 14h-11L5 6zm3-3h8v3H8V3z"
-        stroke={iconColor} 
+        stroke={iconColor}
         strokeWidth={2}
         strokeLinecap="round"
         strokeLinejoin="round"

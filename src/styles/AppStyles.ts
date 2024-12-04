@@ -9,7 +9,7 @@ const lightColors = {
   border: '#ddd',
   placeholder: '#aaa',
   accent: '#8e44ad',
-   card: '#F8F9FA',
+  card: '#F8F9FA',
 };
 
 const darkColors = {
@@ -103,7 +103,7 @@ const createAppStyles = (Colors: typeof lightColors): AppStylesType =>
     taskTimeLabel: {
       fontSize: 14,
       color: Colors.placeholder,
-      width: 50, // Ancho fijo para la etiqueta de tiempo
+      width: 50,
       textAlign: 'center',
     },
     taskItem: {
@@ -114,7 +114,7 @@ const createAppStyles = (Colors: typeof lightColors): AppStylesType =>
       marginLeft: 8,
       marginRight: 8,
       shadowColor: '#000',
-      shadowOffset: { width: 0, height: 2 },
+      shadowOffset: {width: 0, height: 2},
       shadowOpacity: 0.1,
       shadowRadius: 4,
       elevation: 2,
