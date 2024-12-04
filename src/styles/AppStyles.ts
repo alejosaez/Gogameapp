@@ -9,6 +9,7 @@ const lightColors = {
   border: '#ddd',
   placeholder: '#aaa',
   accent: '#8e44ad',
+   card: '#F8F9FA',
 };
 
 const darkColors = {
@@ -20,6 +21,7 @@ const darkColors = {
   border: '#555',
   placeholder: '#888',
   accent: '#2ecc71',
+  card: '#2A2A2A',
 };
 
 const Spacing = {
@@ -81,7 +83,64 @@ const createAppStyles = (Colors: typeof lightColors): AppStylesType =>
     container: {
       flex: 1,
       backgroundColor: Colors.background,
-      padding: Spacing.medium,
+      padding: 16,
+    },
+    searchBar: {
+      height: 40,
+      borderWidth: 1,
+      borderColor: Colors.border,
+      borderRadius: 8,
+      paddingHorizontal: 10,
+      backgroundColor: Colors.card,
+      color: Colors.text,
+      marginBottom: 16,
+    },
+    taskItemContainer: {
+      flexDirection: 'row',
+      alignItems: 'center',
+      marginBottom: 16,
+    },
+    taskTimeLabel: {
+      fontSize: 14,
+      color: Colors.placeholder,
+      width: 50, // Ancho fijo para la etiqueta de tiempo
+      textAlign: 'center',
+    },
+    taskItem: {
+      flex: 1,
+      backgroundColor: Colors.card,
+      borderRadius: 16,
+      padding: 16,
+      marginLeft: 8,
+      marginRight: 8,
+      shadowColor: '#000',
+      shadowOffset: { width: 0, height: 2 },
+      shadowOpacity: 0.1,
+      shadowRadius: 4,
+      elevation: 2,
+    },
+    taskTitle: {
+      fontSize: 16,
+      fontWeight: 'bold',
+      color: Colors.text,
+    },
+    emptyStateText: {
+      textAlign: 'center',
+      color: Colors.placeholder,
+      fontSize: 16,
+      marginTop: 20,
+    },
+    createButton: {
+      position: 'absolute',
+      bottom: 16,
+      right: 16,
+      backgroundColor: Colors.primary,
+      borderRadius: 50,
+      width: 56,
+      height: 56,
+      justifyContent: 'center',
+      alignItems: 'center',
+      elevation: 5,
     },
     text: {
       ...Typography.body,
@@ -100,50 +159,6 @@ const createAppStyles = (Colors: typeof lightColors): AppStylesType =>
       color: '#fff',
       fontWeight: '700',
       textAlign: 'center',
-    },
-    searchBar: {
-      height: 50,
-      backgroundColor: '#fff',
-      borderRadius: 8,
-      paddingHorizontal: Spacing.medium,
-      ...Typography.body,
-      borderColor: Colors.border,
-      borderWidth: 1,
-      marginBottom: Spacing.medium,
-      color: Colors.text,
-    },
-    taskItem: {
-      backgroundColor: '#fff',
-      padding: Spacing.medium,
-      borderRadius: 8,
-      marginBottom: Spacing.small,
-      borderWidth: 1,
-      borderColor: Colors.border,
-    },
-    taskTitle: {
-      ...Typography.body,
-      color: Colors.text,
-    },
-    emptyStateText: {
-      textAlign: 'center',
-      color: Colors.placeholder,
-      ...Typography.body,
-      marginTop: Spacing.medium,
-    },
-    createButton: {
-      position: 'absolute',
-      bottom: Spacing.large,
-      right: Spacing.large,
-      backgroundColor: Colors.accent,
-      borderRadius: 50,
-      padding: Spacing.medium,
-      elevation: 5,
-      shadowColor: '#000',
-      shadowOffset: {width: 0, height: 2},
-      shadowOpacity: 0.3,
-      shadowRadius: 3,
-      alignItems: 'center',
-      justifyContent: 'center',
     },
     createButtonText: {
       ...Typography.h2,
@@ -205,14 +220,6 @@ const createAppStyles = (Colors: typeof lightColors): AppStylesType =>
       ...Typography.body,
       color: '#fff',
       fontWeight: '700',
-    },
-    taskItemContainer: {
-      flexDirection: 'row',
-      alignItems: 'center',
-      justifyContent: 'space-between',
-      padding: 10,
-      borderBottomWidth: 1,
-      borderBottomColor: '#ccc',
     },
 
     modalOverlay: {
