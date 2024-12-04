@@ -214,10 +214,10 @@ const createAppStyles = (Colors: typeof lightColors): AppStylesType =>
       borderBottomWidth: 1,
       borderBottomColor: '#ccc',
     },
-    
+
     modalOverlay: {
       flex: 1,
-      backgroundColor: 'rgba(0, 0, 0, 0.5)', 
+      backgroundColor: 'rgba(0, 0, 0, 0.5)',
       justifyContent: 'center',
       alignItems: 'center',
     },

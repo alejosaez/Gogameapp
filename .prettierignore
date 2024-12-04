@@ -1,1 +1,1 @@
-src/redux/actions/*.ts
+src/redux/actions/tasksActions.ts

@@ -2,12 +2,12 @@ import React, {useState} from 'react';
 import {View, Text, TextInput, TouchableOpacity, Modal} from 'react-native';
 import {useAppSelector} from '../redux/reduxHook';
 import {createAppStyles, lightColors, darkColors} from '../styles/AppStyles';
-import CalendarIcon from './CalendarIcon'; 
+import CalendarIcon from './CalendarIcon';
 
 interface CreateTaskModalProps {
   isVisible: boolean;
   onClose: () => void;
-  onCreate: (title: string) => void; 
+  onCreate: (title: string) => void;
 }
 
 const CreateTaskModal: React.FC<CreateTaskModalProps> = ({
@@ -15,17 +15,17 @@ const CreateTaskModal: React.FC<CreateTaskModalProps> = ({
   onClose,
   onCreate,
 }) => {
-  const [taskTitle, setTaskTitle] = useState(''); 
+  const [taskTitle, setTaskTitle] = useState('');
 
-  const theme = useAppSelector(state => state.theme.theme); 
-  const currentColors = theme === 'dark' ? darkColors : lightColors; 
+  const theme = useAppSelector(state => state.theme.theme);
+  const currentColors = theme === 'dark' ? darkColors : lightColors;
   const styles = createAppStyles(currentColors);
 
   const handleCreate = () => {
     if (taskTitle.trim()) {
-      onCreate(taskTitle.trim()); 
-      setTaskTitle(''); 
-      onClose(); 
+      onCreate(taskTitle.trim());
+      setTaskTitle('');
+      onClose();
     }
   };
 

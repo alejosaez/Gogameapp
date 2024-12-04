@@ -1,7 +1,7 @@
 import React from 'react';
 import {Platform, StyleSheet, ViewStyle} from 'react-native';
-import {Svg, Path} from 'react-native-svg'; 
-import SFSymbol from 'react-native-sfsymbols'; 
+import {Svg, Path} from 'react-native-svg';
+import SFSymbol from 'react-native-sfsymbols';
 
 interface CalendarIconProps {
   color: string;
