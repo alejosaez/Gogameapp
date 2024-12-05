@@ -5,8 +5,8 @@ import {CreateTaskPayload, Task} from '../../types/types';
 
 const BASE_URL =
   Platform.OS === 'android'
-    ? 'http:
-    : 'http:
+    ? 'http://10.0.2.2:3000/tasks' // Dirección para emuladores Android
+    : 'http://localhost:3000/tasks'; // Dirección para emuladores iOS o simuladores
 export const fetchTasks = createAsyncThunk<Task[]>(
   'tasks/fetchTasks',
   async () => {
