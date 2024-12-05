@@ -81,6 +81,10 @@ interface AppStylesType {
   categoryTextContainer:TextStyle
   categoryTitle:TextStyle
   categorySubtitle:TextStyle
+  iconStyle:ViewStyle
+  checkboxIcon: ViewStyle
+  iconCheckBox: ViewStyle
+  rowContainer:ViewStyle
 }
 
 const createAppStyles = (Colors: typeof lightColors): AppStylesType =>
@@ -333,18 +337,18 @@ const createAppStyles = (Colors: typeof lightColors): AppStylesType =>
       flexDirection: 'row',
       alignItems: 'center',
       backgroundColor: Colors.card,
-      padding: Spacing.medium,
-      borderRadius: Spacing.medium,
-      marginBottom: Spacing.medium,
+      padding: Spacing.small,
+      borderRadius: Spacing.small,
+      flex: 1,
       shadowColor: Colors.text,
       shadowOffset: {width: 0, height: 2},
       shadowOpacity: 0.1,
       shadowRadius: 4,
-      elevation: 3,
+      elevation: 2,
     },
     categoryTextContainer: {
       flex: 1,
-      marginRight: Spacing.medium,
+      marginRight: Spacing.small,
     },
     categoryTitle: {
       fontSize: Typography.body.fontSize,
@@ -357,7 +361,28 @@ const createAppStyles = (Colors: typeof lightColors): AppStylesType =>
       marginTop: Spacing.small,
     },
     categoryTrashContainer: {
+      justifyContent: 'center',
+      alignItems: 'center',
       padding: Spacing.small,
+    },
+    iconStyle: {
+      width: 24,
+      height: 24,
+    },
+    checkboxIcon: {
+      marginRight: 12,
+      justifyContent: 'center',
+      alignItems: 'center',
+    },
+    iconCheckBox: {
+      width: 24,
+      height: 24,
+    },
+    rowContainer: {
+      marginRight: Spacing.small,
+      flexDirection: 'row',
+      alignItems: 'center',
+      marginBottom: Spacing.small,
     },
   });
 

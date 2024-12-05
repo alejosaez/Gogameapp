@@ -10,17 +10,19 @@ import {RootStackParamList} from '../../App';
 import AddTaskIcon from '../components/AddTaskIcon';
 import CategoryItem from '../components/CategoryItem';
 import {createAppStyles, lightColors, darkColors} from '../styles/AppStyles';
+import {Task} from '../types/types'; 
 
 type HomeScreenNavigationProp = StackNavigationProp<RootStackParamList, 'Home'>;
 
 const HomeScreen: React.FC = () => {
   const dispatch = useAppDispatch();
-  const navigation = useNavigation<HomeScreenNavigationProp>();
+  const navigation = useNavigation<HomeScreenNavigationProp>(); 
   const alltasks = useAppSelector((state: RootState) => state.tasks.allTasks);
   const theme = useAppSelector((state: RootState) => state.theme.theme);
 
-  const [searchText, setSearchText] = useState('');
-  const [isModalVisible, setIsModalVisible] = useState(false);
+  const [searchText, setSearchText] = useState<string>(''); 
+  const [isModalVisible, setIsModalVisible] = useState<boolean>(false); 
+  const [selectedTasks, setSelectedTasks] = useState<number[]>([]); 
 
   const currentColors = theme === 'dark' ? darkColors : lightColors;
   const styles = createAppStyles(currentColors);
@@ -33,8 +35,16 @@ const HomeScreen: React.FC = () => {
     dispatch(addTask({title}));
   };
 
-  const handleDeleteTask = (taskId: number) => {
-    dispatch(deleteTask(taskId));
+  const handleDeleteTask = (id: number) => {
+    dispatch(deleteTask(id));
+  };
+
+  const toggleSelectTask = (id: number) => {
+    if (selectedTasks.includes(id)) {
+      setSelectedTasks(selectedTasks.filter(selectedId => selectedId !== id));
+    } else {
+      setSelectedTasks([...selectedTasks, id]);
+    }
   };
 
   return (
@@ -50,18 +60,22 @@ const HomeScreen: React.FC = () => {
         data={alltasks.filter(task =>
           task.title.toLowerCase().includes(searchText.toLowerCase()),
         )}
-        keyExtractor={item => item.id.toString()}
-        renderItem={({item}) => (
+        keyExtractor={(item: Task) => item.id.toString()}
+        renderItem={({item}: {item: Task}) => (
           <CategoryItem
             title={item.title}
             content={item.content}
+            isSelected={selectedTasks.includes(item.id)}
             onPress={() => {
-              navigation.navigate('TaskDetail', {
-                taskId: item.id,
-                taskTitle: item.title,
-              });
+              if (!selectedTasks.includes(item.id)) {
+                navigation.navigate('TaskDetail', {
+                  taskId: item.id,
+                  taskTitle: item.title,
+                });
+              }
             }}
             onDelete={() => handleDeleteTask(item.id)}
+            onSelect={() => toggleSelectTask(item.id)} 
           />
         )}
         ListEmptyComponent={
