@@ -1,5 +1,8 @@
-import React from 'react';
-import {Modal, View, Text, TouchableOpacity, StyleSheet} from 'react-native';
+import React, {useState} from 'react';
+import {Modal, View, Text, TouchableOpacity} from 'react-native';
+import {useAppSelector, useAppDispatch} from '../redux/reduxHook';
+import {createAppStyles, lightColors, darkColors} from '../styles/AppStyles';
+import {setLanguage} from '../redux/reducers/languageSlice';
 
 interface SideMenuProps {
   visible: boolean;
@@ -7,52 +10,72 @@ interface SideMenuProps {
 }
 
 const SideMenu: React.FC<SideMenuProps> = ({visible, onClose}) => {
+  const theme = useAppSelector(state => state.theme.theme);
+  const currentLanguage = useAppSelector(state => state.language.language);
+  const dispatch = useAppDispatch();
+  const currentColors = theme === 'dark' ? darkColors : lightColors;
+  const styles = createAppStyles(currentColors);
+
+  const [isDropdownOpen, setDropdownOpen] = useState(false);
+
+  const handleLanguageChange = (language: 'en' | 'es') => {
+    dispatch(setLanguage(language));
+    setDropdownOpen(false); 
+  };
+
   return (
     <Modal
       transparent
       animationType="slide"
       visible={visible}
       onRequestClose={onClose}>
-      <View style={styles.overlay}>
-        <View style={styles.menu}>
-          <Text style={styles.menuTitle}>Menu</Text>
-          <TouchableOpacity style={styles.menuItem} onPress={onClose}>
-            <Text style={styles.menuText}>Home</Text>
+      <View style={styles.sideMenuOverlay}>
+        <View style={styles.sideMenu}>
+          {}
+          <TouchableOpacity onPress={onClose}>
+            <Text style={styles.backButton}>←</Text>
           </TouchableOpacity>
-          <TouchableOpacity style={styles.menuItem} onPress={onClose}>
-            <Text style={styles.menuText}>Settings</Text>
+
+          {}
+          <Text style={styles.sideMenuTitle}>Menu</Text>
+
+          {}
+          <TouchableOpacity
+            style={styles.sideMenuItem}
+            onPress={() => setDropdownOpen(!isDropdownOpen)}>
+            <Text style={styles.sideMenuText}>Language</Text>
           </TouchableOpacity>
-          <TouchableOpacity style={styles.menuItem} onPress={onClose}>
-            <Text style={styles.menuText}>About</Text>
-          </TouchableOpacity>
+
+          {isDropdownOpen && (
+            <View style={styles.dropdown}>
+              <TouchableOpacity
+                style={styles.dropdownItem}
+                onPress={() => handleLanguageChange('en')}>
+                <Text
+                  style={[
+                    styles.dropdownItemText,
+                    currentLanguage === 'en' && styles.selectedText,
+                  ]}>
+                  English
+                </Text>
+              </TouchableOpacity>
+              <TouchableOpacity
+                style={styles.dropdownItem}
+                onPress={() => handleLanguageChange('es')}>
+                <Text
+                  style={[
+                    styles.dropdownItemText,
+                    currentLanguage === 'es' && styles.selectedText,
+                  ]}>
+                  Español
+                </Text>
+              </TouchableOpacity>
+            </View>
+          )}
         </View>
       </View>
     </Modal>
   );
 };
-
-const styles = StyleSheet.create({
-  overlay: {
-    flex: 1,
-    backgroundColor: 'rgba(0, 0, 0, 0.5)',
-  },
-  menu: {
-    width: '75%',
-    height: '100%',
-    backgroundColor: '#fff',
-    padding: 20,
-  },
-  menuTitle: {
-    fontSize: 24,
-    fontWeight: 'bold',
-    marginBottom: 20,
-  },
-  menuItem: {
-    marginBottom: 15,
-  },
-  menuText: {
-    fontSize: 18,
-  },
-});
 
 export default SideMenu;

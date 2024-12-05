@@ -85,6 +85,16 @@ interface AppStylesType {
   checkboxIcon: ViewStyle;
   iconCheckBox: ViewStyle;
   rowContainer: ViewStyle;
+  sideMenuOverlay: ViewStyle; 
+  sideMenu: ViewStyle; 
+  sideMenuTitle: TextStyle; 
+  sideMenuItem: ViewStyle; 
+  sideMenuText: TextStyle; 
+  backButton: TextStyle; 
+  dropdown: ViewStyle; 
+  dropdownItem: ViewStyle; 
+  dropdownItemText: TextStyle;
+  selectedText: TextStyle;
 }
 
 const createAppStyles = (Colors: typeof lightColors): AppStylesType =>
@@ -377,6 +387,55 @@ const createAppStyles = (Colors: typeof lightColors): AppStylesType =>
       flexDirection: 'row',
       alignItems: 'center',
       marginBottom: Spacing.small,
+    },
+    sideMenuOverlay: {
+      flex: 1,
+      backgroundColor: 'rgba(0, 0, 0, 0.5)',
+      justifyContent: 'flex-start',
+      alignItems: 'flex-start',
+    },
+    sideMenu: {
+      width: '75%',
+      height: '100%',
+      backgroundColor: Colors.background,
+      padding: Spacing.medium,
+      borderTopRightRadius: Spacing.medium,
+      borderBottomRightRadius: Spacing.medium,
+    },
+    sideMenuTitle: {
+      fontSize: Typography.h1.fontSize,
+      fontWeight: Typography.h1.fontWeight,
+      color: Colors.text,
+      marginBottom: Spacing.large,
+    },
+    sideMenuItem: {
+      marginBottom: Spacing.medium,
+    },
+    sideMenuText: {
+      fontSize: Typography.body.fontSize,
+      color: Colors.text,
+    },
+    backButton: {
+      fontSize: Typography.h2.fontSize,
+      color: Colors.text,
+      marginBottom: Spacing.large,
+    },
+    dropdown: {
+      backgroundColor: Colors.card,
+      borderRadius: Spacing.small,
+      paddingVertical: Spacing.small,
+      marginTop: Spacing.medium,
+    },
+    dropdownItem: {
+      padding: Spacing.small,
+    },
+    dropdownItemText: {
+      fontSize: Typography.body.fontSize,
+      color: Colors.text,
+    },
+    selectedText: {
+      fontWeight: 'bold',
+      color: Colors.accent, 
     },
   });
 
