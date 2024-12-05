@@ -13,7 +13,7 @@ import {updateTask} from '../redux/actions/tasksActions';
 import {createAppStyles, lightColors, darkColors} from '../styles/AppStyles'; 
 import {RouteProp} from '@react-navigation/native';
 import {StackNavigationProp} from '@react-navigation/stack';
-import {RootStackParamList} from '../../App';
+import { RootStackParamList } from '../navigation/MainNavigator';
 
 type TaskDetailScreenRouteProp = RouteProp<RootStackParamList, 'TaskDetail'>;
 type TaskDetailScreenNavigationProp = StackNavigationProp<

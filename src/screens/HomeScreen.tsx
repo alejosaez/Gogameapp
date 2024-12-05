@@ -6,7 +6,7 @@ import {fetchTasks, addTask, deleteTask} from '../redux/actions/tasksActions';
 import CreateTaskModal from '../components/CreateTasksModal';
 import {useNavigation} from '@react-navigation/native';
 import {StackNavigationProp} from '@react-navigation/stack';
-import {RootStackParamList} from '../../App';
+import { RootStackParamList } from '../navigation/MainNavigator';
 import AddTaskIcon from '../components/AddTaskIcon';
 import CategoryItem from '../components/CategoryItem';
 import {createAppStyles, lightColors, darkColors} from '../styles/AppStyles';
