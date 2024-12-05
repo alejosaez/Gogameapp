@@ -87,7 +87,7 @@ const styles = StyleSheet.create({
   },
   menuText: {
     fontSize: 24,
-    color: '#000', // Cambia según el tema
+    color: '#000',
   },
   headerRight: {
     marginRight: 15,
