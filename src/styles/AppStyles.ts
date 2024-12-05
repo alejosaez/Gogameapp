@@ -9,7 +9,7 @@ const lightColors = {
   border: '#ddd',
   placeholder: '#aaa',
   accent: '#8e44ad',
-  card: '#F8F9FA',
+  card: '#f0ebea',
 };
 
 const darkColors = {
@@ -76,6 +76,11 @@ interface AppStylesType {
   dateText: TextStyle;
   buttonGroup: ViewStyle;
   iconSpacing: ViewStyle;
+  categoryTrashContainer:ViewStyle;
+  categoryCard: ViewStyle
+  categoryTextContainer:TextStyle
+  categoryTitle:TextStyle
+  categorySubtitle:TextStyle
 }
 
 const createAppStyles = (Colors: typeof lightColors): AppStylesType =>
@@ -323,6 +328,36 @@ const createAppStyles = (Colors: typeof lightColors): AppStylesType =>
     },
     iconSpacing: {
       marginRight: 10,
+    },
+    categoryCard: {
+      flexDirection: 'row',
+      alignItems: 'center',
+      backgroundColor: Colors.card,
+      padding: Spacing.medium,
+      borderRadius: Spacing.medium,
+      marginBottom: Spacing.medium,
+      shadowColor: Colors.text,
+      shadowOffset: {width: 0, height: 2},
+      shadowOpacity: 0.1,
+      shadowRadius: 4,
+      elevation: 3,
+    },
+    categoryTextContainer: {
+      flex: 1,
+      marginRight: Spacing.medium,
+    },
+    categoryTitle: {
+      fontSize: Typography.body.fontSize,
+      fontWeight: Typography.h2.fontWeight,
+      color: Colors.text,
+    },
+    categorySubtitle: {
+      fontSize: Typography.small.fontSize,
+      color: Colors.placeholder,
+      marginTop: Spacing.small,
+    },
+    categoryTrashContainer: {
+      padding: Spacing.small,
     },
   });
 
