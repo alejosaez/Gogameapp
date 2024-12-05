@@ -10,19 +10,19 @@ import {RootStackParamList} from '../../App';
 import AddTaskIcon from '../components/AddTaskIcon';
 import CategoryItem from '../components/CategoryItem';
 import {createAppStyles, lightColors, darkColors} from '../styles/AppStyles';
-import {Task} from '../types/types'; 
+import {Task} from '../types/types';
 
 type HomeScreenNavigationProp = StackNavigationProp<RootStackParamList, 'Home'>;
 
 const HomeScreen: React.FC = () => {
   const dispatch = useAppDispatch();
-  const navigation = useNavigation<HomeScreenNavigationProp>(); 
+  const navigation = useNavigation<HomeScreenNavigationProp>();
   const alltasks = useAppSelector((state: RootState) => state.tasks.allTasks);
   const theme = useAppSelector((state: RootState) => state.theme.theme);
 
-  const [searchText, setSearchText] = useState<string>(''); 
-  const [isModalVisible, setIsModalVisible] = useState<boolean>(false); 
-  const [selectedTasks, setSelectedTasks] = useState<number[]>([]); 
+  const [searchText, setSearchText] = useState<string>('');
+  const [isModalVisible, setIsModalVisible] = useState<boolean>(false);
+  const [selectedTasks, setSelectedTasks] = useState<number[]>([]);
 
   const currentColors = theme === 'dark' ? darkColors : lightColors;
   const styles = createAppStyles(currentColors);
@@ -75,7 +75,7 @@ const HomeScreen: React.FC = () => {
               }
             }}
             onDelete={() => handleDeleteTask(item.id)}
-            onSelect={() => toggleSelectTask(item.id)} 
+            onSelect={() => toggleSelectTask(item.id)}
           />
         )}
         ListEmptyComponent={

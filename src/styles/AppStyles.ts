@@ -122,11 +122,6 @@ const createAppStyles = (Colors: typeof lightColors): AppStylesType =>
       padding: 16,
       marginLeft: 8,
       marginRight: 8,
-      shadowColor: '#000',
-      shadowOffset: {width: 0, height: 2},
-      shadowOpacity: 0.1,
-      shadowRadius: 4,
-      elevation: 2,
     },
     taskTitle: {
       fontSize: 16,
@@ -340,11 +335,6 @@ const createAppStyles = (Colors: typeof lightColors): AppStylesType =>
       padding: Spacing.small,
       borderRadius: Spacing.small,
       flex: 1,
-      shadowColor: Colors.text,
-      shadowOffset: {width: 0, height: 2},
-      shadowOpacity: 0.1,
-      shadowRadius: 4,
-      elevation: 2,
     },
     categoryTextContainer: {
       flex: 1,

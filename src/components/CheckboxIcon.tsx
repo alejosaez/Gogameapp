@@ -27,15 +27,14 @@ const CheckboxIcon: React.FC<CheckboxIconProps> = ({isChecked, onPress}) => {
           weight="regular"
           scale="large"
           color={iconColor}
-          style={styles.iconCheckBox} 
+          style={styles.iconCheckBox}
         />
       ) : (
         <Svg
           width={24}
           height={24}
           viewBox="0 0 24 24"
-          style={styles.iconCheckBox} 
-        >
+          style={styles.iconCheckBox}>
           {isChecked ? (
             <Path
               d="M4 12l6 6L20 6"
