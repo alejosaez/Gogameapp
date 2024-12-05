@@ -1,7 +1,7 @@
 import {StyleSheet, ViewStyle, TextStyle} from 'react-native';
 
 const lightColors = {
-  primary: '#3498db',
+  primary: '#9b59b6',
   secondary: '#2ecc71',
   background: '#f4f4f4',
   text: '#333',
