@@ -27,20 +27,21 @@ const CategoryItem: React.FC<CategoryItemProps> = ({
   const currentColors = theme === 'dark' ? darkColors : lightColors;
   const styles = createAppStyles(currentColors);
 
-  const previewContent =
-    content.length > 30 ? `${content.slice(0, 30)}...` : content;
+  const displayContent = content.trim()
+    ? content.length > 20
+      ? `${content.slice(0, 20)}...`
+      : content
+    : 'No tiene ninguna nota';
 
   return (
     <View style={styles.rowContainer}>
-      {}
       <CheckboxIcon isChecked={isSelected} onPress={onSelect} />
-      {}
       <View style={styles.categoryCard}>
         <TouchableOpacity
           style={styles.categoryTextContainer}
           onPress={onPress}>
           <Text style={styles.categoryTitle}>{title}</Text>
-          <Text style={styles.categorySubtitle}>{previewContent}</Text>
+          <Text style={styles.categorySubtitle}>{displayContent}</Text>
         </TouchableOpacity>
         <TouchableOpacity
           style={styles.categoryTrashContainer}
