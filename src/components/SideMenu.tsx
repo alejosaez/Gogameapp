@@ -1,5 +1,5 @@
-import React, {useState} from 'react';
-import {Modal, View, Text, TouchableOpacity} from 'react-native';
+import React, {useState, useRef, useEffect, useCallback} from 'react';
+import {Modal, View, Text, TouchableOpacity, Animated} from 'react-native';
 import {useAppSelector, useAppDispatch} from '../redux/reduxHook';
 import {createAppStyles, lightColors, darkColors} from '../styles/AppStyles';
 import {setLanguage} from '../redux/reducers/languageSlice';
@@ -18,6 +18,27 @@ const SideMenu: React.FC<SideMenuProps> = ({visible, onClose}) => {
 
   const [isDropdownOpen, setDropdownOpen] = useState(false);
 
+  const slideAnim = useRef(new Animated.Value(-300)).current;
+
+  const animateMenu = useCallback(
+    (toValue: number) => {
+      Animated.timing(slideAnim, {
+        toValue,
+        duration: 300,
+        useNativeDriver: false,
+      }).start();
+    },
+    [slideAnim],
+  );
+
+  useEffect(() => {
+    if (visible) {
+      animateMenu(0);
+    } else {
+      animateMenu(-300);
+    }
+  }, [visible, animateMenu]);
+
   const handleLanguageChange = (language: 'en' | 'es') => {
     dispatch(setLanguage(language));
     setDropdownOpen(false);
@@ -26,20 +47,17 @@ const SideMenu: React.FC<SideMenuProps> = ({visible, onClose}) => {
   return (
     <Modal
       transparent
-      animationType="slide"
+      animationType="none"
       visible={visible}
       onRequestClose={onClose}>
       <View style={styles.sideMenuOverlay}>
-        <View style={styles.sideMenu}>
-          {}
+        <Animated.View style={[styles.sideMenu, {left: slideAnim}]}>
           <TouchableOpacity onPress={onClose}>
             <Text style={styles.backButton}>←</Text>
           </TouchableOpacity>
 
-          {}
           <Text style={styles.sideMenuTitle}>Menu</Text>
 
-          {}
           <TouchableOpacity
             style={styles.sideMenuItem}
             onPress={() => setDropdownOpen(!isDropdownOpen)}>
@@ -72,7 +90,7 @@ const SideMenu: React.FC<SideMenuProps> = ({visible, onClose}) => {
               </TouchableOpacity>
             </View>
           )}
-        </View>
+        </Animated.View>
       </View>
     </Modal>
   );

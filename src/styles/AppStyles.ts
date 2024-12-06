@@ -397,12 +397,20 @@ const createAppStyles = (Colors: typeof lightColors): AppStylesType =>
       alignItems: 'flex-start',
     },
     sideMenu: {
-      width: '75%',
+      position: 'absolute',
+      top: 0,
+      left: -300, // Empieza fuera de la pantalla
+      width: 300, // Ajusta el ancho de tu menú
       height: '100%',
       backgroundColor: Colors.sideMenuBackground,
       padding: Spacing.medium,
       borderTopRightRadius: Spacing.medium,
       borderBottomRightRadius: Spacing.medium,
+      shadowColor: '#000',
+      shadowOffset: { width: 2, height: 0 },
+      shadowOpacity: 0.25,
+      shadowRadius: 4,
+      elevation: 5,
     },
     sideMenuTitle: {
       fontSize: Typography.h1.fontSize,
