@@ -391,6 +391,15 @@ const createAppStyles = (Colors: typeof lightColors): AppStylesType =>
       fontWeight: 'bold',
       color: Colors.accent,
     },
+    title: {
+      fontSize: 20,
+      fontWeight: 'bold',
+      color: Colors.text,
+    },
+    switchContainer: {
+      flexDirection: 'row',
+      alignItems: 'center',
+    },
   });
 
 export {createAppStyles, lightColors, darkColors, Spacing, Typography};

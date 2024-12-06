@@ -56,4 +56,6 @@ export interface AppStylesType {
   dropdownItem: ViewStyle;
   dropdownItemText: TextStyle;
   selectedText: TextStyle;
+  title: TextStyle;
+  switchContainer: ViewStyle;
 }
