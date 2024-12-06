@@ -1,4 +1,5 @@
-import {StyleSheet, ViewStyle, TextStyle} from 'react-native';
+import {StyleSheet, TextStyle} from 'react-native';
+import { AppStylesType } from './typesStyled';
 import { MENU_WIDTH } from '../components/constants';
 const lightColors = {
   primary: '#9b59b6',
@@ -40,64 +41,7 @@ const Typography = {
   small: {fontSize: 12, fontWeight: '400' as TextStyle['fontWeight']},
 };
 
-interface AppStylesType {
-  container: ViewStyle;
-  text: TextStyle;
-  button: ViewStyle;
-  buttonText: TextStyle;
-  searchBar: TextStyle;
-  taskItem: ViewStyle;
-  taskTitle: TextStyle;
-  emptyStateText: TextStyle;
-  createButton: ViewStyle;
-  createButtonText: TextStyle;
-  modalContainer: ViewStyle;
-  modalTitle: TextStyle;
-  modalInput: TextStyle;
-  modalButton: ViewStyle;
-  modalButtonText: TextStyle;
-  modalCloseButton: ViewStyle;
-  modalCloseButtonText: TextStyle;
-  errorText: TextStyle;
-  saveButton: ViewStyle;
-  saveButtonText: TextStyle;
-  titleInput: TextStyle;
-  editor: ViewStyle;
-  editorContainer: ViewStyle;
-  taskItemContainer: ViewStyle;
-  modalOverlay: ViewStyle;
-  modalContent: ViewStyle;
-  label: TextStyle;
-  input: TextStyle;
-  categoryContainer: ViewStyle;
-  categoryButton: ViewStyle;
-  categorySelected: ViewStyle;
-  categoryText: TextStyle;
-  categoryTextSelected: TextStyle;
-  dateButton: ViewStyle;
-  dateText: TextStyle;
-  buttonGroup: ViewStyle;
-  iconSpacing: ViewStyle;
-  categoryTrashContainer: ViewStyle;
-  categoryCard: ViewStyle;
-  categoryTextContainer: TextStyle;
-  categoryTitle: TextStyle;
-  categorySubtitle: TextStyle;
-  iconStyle: ViewStyle;
-  checkboxIcon: ViewStyle;
-  iconCheckBox: ViewStyle;
-  rowContainer: ViewStyle;
-  sideMenuOverlay: ViewStyle;
-  sideMenu: ViewStyle;
-  sideMenuTitle: TextStyle;
-  sideMenuItem: ViewStyle;
-  sideMenuText: TextStyle;
-  backButton: TextStyle;
-  dropdown: ViewStyle;
-  dropdownItem: ViewStyle;
-  dropdownItemText: TextStyle;
-  selectedText: TextStyle;
-}
+
 
 const createAppStyles = (Colors: typeof lightColors): AppStylesType =>
   StyleSheet.create<AppStylesType>({

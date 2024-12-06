@@ -5,7 +5,7 @@ import {toggleTheme} from '../redux/reducers/themeSlice';
 import {lightColors, darkColors} from '../styles/AppStyles';
 
 interface CustomHeaderProps {
-  onMenuPress: () => void; 
+  onMenuPress: () => void;
 }
 
 const CustomHeader: React.FC<CustomHeaderProps> = ({onMenuPress}) => {
