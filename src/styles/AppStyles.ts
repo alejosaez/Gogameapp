@@ -1,5 +1,5 @@
 import {StyleSheet, ViewStyle, TextStyle} from 'react-native';
-
+import { MENU_WIDTH } from '../components/constants';
 const lightColors = {
   primary: '#9b59b6',
   secondary: '#2ecc71',
@@ -399,15 +399,15 @@ const createAppStyles = (Colors: typeof lightColors): AppStylesType =>
     sideMenu: {
       position: 'absolute',
       top: 0,
-      left: -300, // Empieza fuera de la pantalla
-      width: 300, // Ajusta el ancho de tu menú
+      left: -MENU_WIDTH,
+      width: MENU_WIDTH,
       height: '100%',
       backgroundColor: Colors.sideMenuBackground,
       padding: Spacing.medium,
       borderTopRightRadius: Spacing.medium,
       borderBottomRightRadius: Spacing.medium,
       shadowColor: '#000',
-      shadowOffset: { width: 2, height: 0 },
+      shadowOffset: {width: 2, height: 0},
       shadowOpacity: 0.25,
       shadowRadius: 4,
       elevation: 5,

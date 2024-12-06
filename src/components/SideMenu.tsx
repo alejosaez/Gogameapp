@@ -1,8 +1,9 @@
-import React, {useState, useRef, useEffect, useCallback} from 'react';
+import React, {useState, useEffect} from 'react';
 import {Modal, View, Text, TouchableOpacity, Animated} from 'react-native';
 import {useAppSelector, useAppDispatch} from '../redux/reduxHook';
 import {createAppStyles, lightColors, darkColors} from '../styles/AppStyles';
 import {setLanguage} from '../redux/reducers/languageSlice';
+import useSlideAnimation from './hook/ useSlideAnimation';
 
 interface SideMenuProps {
   visible: boolean;
@@ -18,26 +19,16 @@ const SideMenu: React.FC<SideMenuProps> = ({visible, onClose}) => {
 
   const [isDropdownOpen, setDropdownOpen] = useState(false);
 
-  const slideAnim = useRef(new Animated.Value(-300)).current;
 
-  const animateMenu = useCallback(
-    (toValue: number) => {
-      Animated.timing(slideAnim, {
-        toValue,
-        duration: 300,
-        useNativeDriver: false,
-      }).start();
-    },
-    [slideAnim],
-  );
+  const {slideAnim, animate} = useSlideAnimation(-300);
 
   useEffect(() => {
     if (visible) {
-      animateMenu(0);
+      animate(0);
     } else {
-      animateMenu(-300);
+      animate(-300);
     }
-  }, [visible, animateMenu]);
+  }, [visible, animate]);
 
   const handleLanguageChange = (language: 'en' | 'es') => {
     dispatch(setLanguage(language));
