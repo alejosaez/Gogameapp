@@ -19,7 +19,6 @@ const SideMenu: React.FC<SideMenuProps> = ({visible, onClose}) => {
 
   const [isDropdownOpen, setDropdownOpen] = useState(false);
 
-
   const {slideAnim, animate} = useSlideAnimation(-300);
 
   useEffect(() => {
@@ -52,7 +51,13 @@ const SideMenu: React.FC<SideMenuProps> = ({visible, onClose}) => {
           <TouchableOpacity
             style={styles.sideMenuItem}
             onPress={() => setDropdownOpen(!isDropdownOpen)}>
-            <Text style={styles.sideMenuText}>Language</Text>
+            <Text style={styles.sideMenuText}>
+              {currentLanguage
+                ? currentLanguage === 'en'
+                  ? 'English'
+                  : 'Español'
+                : 'Language'}
+            </Text>
           </TouchableOpacity>
 
           {isDropdownOpen && (
