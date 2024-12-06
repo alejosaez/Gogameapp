@@ -20,7 +20,7 @@ const SideMenu: React.FC<SideMenuProps> = ({visible, onClose}) => {
 
   const handleLanguageChange = (language: 'en' | 'es') => {
     dispatch(setLanguage(language));
-    setDropdownOpen(false); 
+    setDropdownOpen(false);
   };
 
   return (

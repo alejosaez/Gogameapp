@@ -10,6 +10,7 @@ const lightColors = {
   placeholder: '#aaa',
   accent: '#8e44ad',
   card: '#f0ebea',
+  sideMenuBackground: '#f0ebea',
 };
 
 const darkColors = {
@@ -22,6 +23,7 @@ const darkColors = {
   placeholder: '#888',
   accent: '#2ecc71',
   card: '#2A2A2A',
+  sideMenuBackground: '#9b59b6',
 };
 
 const Spacing = {
@@ -85,14 +87,14 @@ interface AppStylesType {
   checkboxIcon: ViewStyle;
   iconCheckBox: ViewStyle;
   rowContainer: ViewStyle;
-  sideMenuOverlay: ViewStyle; 
-  sideMenu: ViewStyle; 
-  sideMenuTitle: TextStyle; 
-  sideMenuItem: ViewStyle; 
-  sideMenuText: TextStyle; 
-  backButton: TextStyle; 
-  dropdown: ViewStyle; 
-  dropdownItem: ViewStyle; 
+  sideMenuOverlay: ViewStyle;
+  sideMenu: ViewStyle;
+  sideMenuTitle: TextStyle;
+  sideMenuItem: ViewStyle;
+  sideMenuText: TextStyle;
+  backButton: TextStyle;
+  dropdown: ViewStyle;
+  dropdownItem: ViewStyle;
   dropdownItemText: TextStyle;
   selectedText: TextStyle;
 }
@@ -397,7 +399,7 @@ const createAppStyles = (Colors: typeof lightColors): AppStylesType =>
     sideMenu: {
       width: '75%',
       height: '100%',
-      backgroundColor: Colors.background,
+      backgroundColor: Colors.sideMenuBackground,
       padding: Spacing.medium,
       borderTopRightRadius: Spacing.medium,
       borderBottomRightRadius: Spacing.medium,
@@ -435,7 +437,7 @@ const createAppStyles = (Colors: typeof lightColors): AppStylesType =>
     },
     selectedText: {
       fontWeight: 'bold',
-      color: Colors.accent, 
+      color: Colors.accent,
     },
   });
 

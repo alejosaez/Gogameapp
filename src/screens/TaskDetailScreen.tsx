@@ -10,10 +10,10 @@ import {
 import {useAppSelector, useAppDispatch} from '../redux/reduxHook';
 import {RootState} from '../redux/store';
 import {updateTask} from '../redux/actions/tasksActions';
-import {createAppStyles, lightColors, darkColors} from '../styles/AppStyles'; 
+import {createAppStyles, lightColors, darkColors} from '../styles/AppStyles';
 import {RouteProp} from '@react-navigation/native';
 import {StackNavigationProp} from '@react-navigation/stack';
-import { RootStackParamList } from '../navigation/MainNavigator';
+import {RootStackParamList} from '../navigation/MainNavigator';
 
 type TaskDetailScreenRouteProp = RouteProp<RootStackParamList, 'TaskDetail'>;
 type TaskDetailScreenNavigationProp = StackNavigationProp<
@@ -33,10 +33,9 @@ const TaskDetailScreen: React.FC<TaskDetailScreenProps> = ({
   const {taskId} = route.params;
   const dispatch = useAppDispatch();
 
-  
   const theme = useAppSelector((state: RootState) => state.theme.theme);
   const currentColors = theme === 'dark' ? darkColors : lightColors;
-  const styles = createAppStyles(currentColors); 
+  const styles = createAppStyles(currentColors);
 
   const taskData = useAppSelector((state: RootState) =>
     state.tasks.allTasks.find(task => task.id === taskId),
@@ -90,7 +89,7 @@ const TaskDetailScreen: React.FC<TaskDetailScreenProps> = ({
         behavior={Platform.OS === 'ios' ? 'padding' : 'height'}
         style={styles.editorContainer}>
         <TextInput
-          style={styles.editor} 
+          style={styles.editor}
           multiline
           value={content}
           onChangeText={setContent}
