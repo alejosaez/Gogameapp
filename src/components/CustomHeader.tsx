@@ -1,59 +1,74 @@
 import React from 'react';
-import {View, Text, TouchableOpacity, StyleSheet, Switch} from 'react-native';
-import {useAppSelector, useAppDispatch} from '../redux/reduxHook';
-import {toggleTheme} from '../redux/reducers/themeSlice';
-import {lightColors, darkColors} from '../styles/AppStyles';
+import {View, StyleSheet, TouchableOpacity, Text, Switch, Platform} from 'react-native';
 
 interface CustomHeaderProps {
+  theme: string;
+  onToggleTheme: () => void;
   onMenuPress: () => void;
+  menuColor: string;
+  title: string;
 }
 
-const CustomHeader: React.FC<CustomHeaderProps> = ({onMenuPress}) => {
-  const theme = useAppSelector(state => state.theme.theme);
-  const dispatch = useAppDispatch();
-  const currentColors = theme === 'dark' ? darkColors : lightColors;
-
-  const styles = StyleSheet.create({
-    container: {
-      flexDirection: 'row',
-      justifyContent: 'space-between',
-      alignItems: 'center',
-      paddingHorizontal: 16,
-      backgroundColor: currentColors.background,
-      height: 60,
-      borderBottomWidth: 1,
-      borderBottomColor: currentColors.border,
-    },
-    title: {
-      fontSize: 20,
-      fontWeight: 'bold',
-      color: currentColors.text,
-    },
-    menuButton: {
-      fontSize: 24,
-      color: currentColors.text,
-    },
-    switchContainer: {
-      flexDirection: 'row',
-      alignItems: 'center',
-    },
-  });
+const CustomHeader: React.FC<CustomHeaderProps> = ({
+  theme,
+  onToggleTheme,
+  onMenuPress,
+  menuColor,
+  title,
+}) => {
+  const isDarkTheme = theme === 'dark';
 
   return (
-    <View style={styles.container}>
-      <TouchableOpacity onPress={onMenuPress}>
-        <Text style={styles.menuButton}>☰</Text>
+    <View
+      style={[
+        styles.container,
+        {backgroundColor: isDarkTheme ? '#333' : '#fff'},
+        Platform.OS === 'ios' && {paddingTop: 20}, 
+      ]}>
+      {}
+      <TouchableOpacity onPress={onMenuPress} style={styles.headerLeft}>
+        <Text style={[styles.menuText, {color: menuColor}]}>☰</Text>
       </TouchableOpacity>
 
-      <Text style={styles.title}>Tasks</Text>
-      <View style={styles.switchContainer}>
-        <Switch
-          value={theme === 'dark'}
-          onValueChange={() => dispatch(toggleTheme())}
-        />
-      </View>
+      {}
+      <Text style={[styles.title, {color: isDarkTheme ? '#fff' : '#000'}]}>
+        {title}
+      </Text>
+
+      {}
+      <Switch
+        value={isDarkTheme}
+        onValueChange={onToggleTheme}
+        style={[styles.headerRight, Platform.OS === 'ios' && {transform: [{ scale: 0.8 }]}]} 
+      />
     </View>
   );
 };
+
+const styles = StyleSheet.create({
+  container: {
+    flexDirection: 'row',
+    alignItems: 'center',
+    justifyContent: 'space-between',
+    paddingHorizontal: 15,
+    height: 60,
+    borderBottomWidth: 1,
+    borderBottomColor: '#ccc',
+  },
+  headerLeft: {
+    marginLeft: 10,
+  },
+  menuText: {
+    fontSize: 24,
+    fontWeight: 'bold',
+  },
+  title: {
+    fontSize: 18,
+    fontWeight: 'bold',
+  },
+  headerRight: {
+    marginRight: 10,
+  },
+});
 
 export default CustomHeader;

@@ -6,8 +6,8 @@ import {toggleTheme} from '../redux/reducers/themeSlice';
 import HomeScreen from '../screens/HomeScreen';
 import TaskDetailScreen from '../screens/TaskDetailScreen';
 import SideMenu from '../components/SideMenu';
+import CustomHeader from '../components/CustomHeader';
 import {darkColors, lightColors} from '../styles/AppStyles';
-import {TouchableOpacity, Text, Switch, StyleSheet} from 'react-native';
 
 export type RootStackParamList = {
   Home: undefined;
@@ -16,82 +16,64 @@ export type RootStackParamList = {
 
 const Stack = createStackNavigator<RootStackParamList>();
 
-const HeaderLeftMenu: React.FC<{onMenuPress: () => void}> = ({onMenuPress}) => (
-  <TouchableOpacity onPress={onMenuPress} style={styles.headerLeft}>
-    <Text style={styles.menuText}>☰</Text>
-  </TouchableOpacity>
-);
-
-const HeaderRightSwitch: React.FC<{
-  theme: string;
-  onToggleTheme: () => void;
-}> = ({theme, onToggleTheme}) => (
-  <Switch
-    value={theme === 'dark'}
-    onValueChange={onToggleTheme}
-    style={styles.headerRight}
-  />
-);
-
 const MainNavigator: React.FC = () => {
   const dispatch = useDispatch();
   const theme = useSelector((state: RootState) => state.theme.theme);
-
-  const currentColors = theme === 'dark' ? darkColors : lightColors;
   const [isMenuVisible, setIsMenuVisible] = useState(false);
 
-  const handleToggleTheme = (_value: boolean) => {
+  
+  const currentColors = theme === 'dark' ? darkColors : lightColors;
+
+  const handleToggleTheme = () => {
     dispatch(toggleTheme());
   };
 
   return (
     <>
+      {}
       <SideMenu
         visible={isMenuVisible}
         onClose={() => setIsMenuVisible(false)}
       />
-      <Stack.Navigator
-        screenOptions={{
-          headerStyle: {backgroundColor: currentColors.background},
-          headerTintColor: currentColors.text,
-          headerLeft: () => (
-            <HeaderLeftMenu onMenuPress={() => setIsMenuVisible(true)} />
-          ),
-          headerRight: () => (
-            <HeaderRightSwitch
-              theme={theme}
-              onToggleTheme={handleToggleTheme}
-            />
-          ),
-        }}>
+
+      {}
+      <Stack.Navigator>
+        {}
         <Stack.Screen
           name="Home"
           component={HomeScreen}
-          options={{title: 'Tasks'}}
+          options={{
+            header: () => (
+              <CustomHeader
+                theme={theme}
+                onToggleTheme={handleToggleTheme}
+                onMenuPress={() => setIsMenuVisible(true)}
+                menuColor={currentColors.primary} 
+                title="Tasks" 
+              />
+            ),
+          }}
         />
+
+        {}
         <Stack.Screen
           name="TaskDetail"
           component={TaskDetailScreen}
           options={({route}) => ({
-            title: route.params.taskTitle || 'Detalles de la tarea',
+            header: () => (
+              <CustomHeader
+                theme={theme}
+                onToggleTheme={handleToggleTheme}
+                onMenuPress={() => setIsMenuVisible(true)}
+                menuColor={currentColors.primary} 
+                title={route.params.taskTitle} 
+              />
+            ),
           })}
         />
       </Stack.Navigator>
     </>
   );
 };
-
-const styles = StyleSheet.create({
-  headerLeft: {
-    marginLeft: 15,
-  },
-  menuText: {
-    fontSize: 24,
-    color: '#000',
-  },
-  headerRight: {
-    marginRight: 15,
-  },
-});
 
 export default MainNavigator;
