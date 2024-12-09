@@ -1,5 +1,12 @@
 import React from 'react';
-import {View, StyleSheet, TouchableOpacity, Text, Switch, Platform} from 'react-native';
+import {
+  View,
+  StyleSheet,
+  TouchableOpacity,
+  Text,
+  Switch,
+  Platform,
+} from 'react-native';
 
 interface CustomHeaderProps {
   theme: string;
@@ -23,23 +30,27 @@ const CustomHeader: React.FC<CustomHeaderProps> = ({
       style={[
         styles.container,
         {backgroundColor: isDarkTheme ? '#333' : '#fff'},
-        Platform.OS === 'ios' && {paddingTop: 20}, 
+        Platform.OS === 'ios' && {paddingTop: 20},
       ]}>
-      {}
       <TouchableOpacity onPress={onMenuPress} style={styles.headerLeft}>
         <Text style={[styles.menuText, {color: menuColor}]}>☰</Text>
       </TouchableOpacity>
 
-      {}
       <Text style={[styles.title, {color: isDarkTheme ? '#fff' : '#000'}]}>
         {title}
       </Text>
-
-      {}
       <Switch
         value={isDarkTheme}
         onValueChange={onToggleTheme}
-        style={[styles.headerRight, Platform.OS === 'ios' && {transform: [{ scale: 0.8 }]}]} 
+        style={[
+          styles.headerRight,
+          Platform.OS === 'ios' && {transform: [{scale: 0.8}]},
+        ]}
+        trackColor={{
+          false: '#767577',
+          true: '#9b59b6',
+        }}
+        thumbColor={isDarkTheme ? '#fff' : '#f4f3f4'}
       />
     </View>
   );
