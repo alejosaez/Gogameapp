@@ -4,7 +4,7 @@ import {useAppSelector, useAppDispatch} from '../redux/reduxHook';
 import {createAppStyles, lightColors, darkColors} from '../styles/AppStyles';
 import {setLanguage} from '../redux/reducers/languageSlice';
 import useSlideAnimation from './hook/ useSlideAnimation';
-
+import i18n from '../../i18n';
 interface SideMenuProps {
   visible: boolean;
   onClose: () => void;
@@ -30,8 +30,9 @@ const SideMenu: React.FC<SideMenuProps> = ({visible, onClose}) => {
   }, [visible, animate]);
 
   const handleLanguageChange = (language: 'en' | 'es') => {
-    dispatch(setLanguage(language));
-    setDropdownOpen(false);
+    dispatch(setLanguage(language)); // Cambia el idioma en Redux
+    i18n.changeLanguage(language); // Cambia el idioma en i18next
+    setDropdownOpen(false); // Cierra el dropdown
   };
 
   return (

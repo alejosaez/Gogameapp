@@ -11,7 +11,7 @@ import AddTaskIcon from '../components/AddTaskIcon';
 import CategoryItem from '../components/CategoryItem';
 import {createAppStyles, lightColors, darkColors} from '../styles/AppStyles';
 import {Task} from '../types/types';
-
+import {useTranslation} from 'react-i18next';
 type HomeScreenNavigationProp = StackNavigationProp<RootStackParamList, 'Home'>;
 
 const HomeScreen: React.FC = () => {
@@ -19,6 +19,7 @@ const HomeScreen: React.FC = () => {
   const navigation = useNavigation<HomeScreenNavigationProp>();
   const alltasks = useAppSelector((state: RootState) => state.tasks.allTasks);
   const theme = useAppSelector((state: RootState) => state.theme.theme);
+  const {t} = useTranslation();
 
   const [searchText, setSearchText] = useState<string>('');
   const [isModalVisible, setIsModalVisible] = useState<boolean>(false);
@@ -51,7 +52,7 @@ const HomeScreen: React.FC = () => {
     <View style={styles.container}>
       <TextInput
         style={styles.searchBar}
-        placeholder="Buscar tareas..."
+        placeholder={t('searchPlaceholder')}
         placeholderTextColor={currentColors.placeholder}
         value={searchText}
         onChangeText={setSearchText}
