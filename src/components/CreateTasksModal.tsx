@@ -49,12 +49,12 @@ const CreateTaskModal: React.FC<CreateTaskModalProps> = ({
           <Text style={styles.modalTitle}>{t('newTask')}</Text>
           <Text style={styles.label}>{t('titleLabel')}</Text>
           <TextInput
-            style={styles.input}
-            placeholder={t('examplePlaceholder')}
-            placeholderTextColor={currentColors.placeholder}
-            value={taskTitle}
-            onChangeText={setTaskTitle}
-          />
+  style={[styles.input, {color: currentColors.text}]}
+  placeholder={t('examplePlaceholder')}
+  placeholderTextColor={currentColors.placeholder}
+  value={taskTitle}
+  onChangeText={setTaskTitle}
+/>
 
           <View style={styles.buttonGroup}>
             <TouchableOpacity style={styles.modalButton} onPress={handleCreate}>

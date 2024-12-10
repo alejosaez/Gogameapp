@@ -5,13 +5,14 @@ const lightColors = {
   primary: '#9b59b6',
   secondary: '#2ecc71',
   background: '#f4f4f4',
-  text: '#333',
+  text: '#FFF',
   error: '#e74c3c',
   border: '#ddd',
   placeholder: '#aaa',
   accent: '#8e44ad',
   card: '#f0ebea',
   sideMenuBackground: '#f0ebea',
+  buttonText:'#ffffff',
 };
 
 const darkColors = {
@@ -21,10 +22,11 @@ const darkColors = {
   text: '#FFF',
   error: '#e74c3c',
   border: '#555',
-  placeholder: '#888',
+  placeholder: '#FFF',
   accent: '#2ecc71',
   card: '#2A2A2A',
   sideMenuBackground: '#9b59b6',
+  buttonText:'##fffff',
 };
 
 const Spacing = {
@@ -221,7 +223,8 @@ const createAppStyles = (Colors: typeof lightColors): AppStylesType =>
       borderRadius: 10,
       padding: 10,
       marginTop: 10,
-      color: Colors.text,
+      color: Colors.text, // El texto usará el color dinámico
+      backgroundColor: Colors.card, // Fondo dinámico
     },
     categoryContainer: {
       flexDirection: 'row',
