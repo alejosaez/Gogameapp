@@ -6,7 +6,7 @@ import {fetchTasks, addTask, deleteTask} from '../redux/actions/tasksActions';
 import CreateTaskModal from '../components/CreateTasksModal';
 import {useNavigation} from '@react-navigation/native';
 import {StackNavigationProp} from '@react-navigation/stack';
-import { RootStackParamList } from '../navigation/MainNavigator';
+import {RootStackParamList} from '../navigation/MainNavigator';
 import AddTaskIcon from '../components/AddTaskIcon';
 import CategoryItem from '../components/CategoryItem';
 import {createAppStyles, lightColors, darkColors} from '../styles/AppStyles';
@@ -80,7 +80,7 @@ const HomeScreen: React.FC = () => {
           />
         )}
         ListEmptyComponent={
-          <Text style={styles.emptyStateText}>No hay tareas</Text>
+          <Text style={styles.emptyStateText}>{t('noTasks')}</Text>
         }
       />
       <TouchableOpacity

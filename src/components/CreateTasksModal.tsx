@@ -10,7 +10,7 @@ import {
 } from 'react-native';
 import {useAppSelector} from '../redux/reduxHook';
 import {createAppStyles, lightColors, darkColors} from '../styles/AppStyles';
-
+import {useTranslation} from 'react-i18next';
 interface CreateTaskModalProps {
   isVisible: boolean;
   onClose: () => void;
@@ -27,7 +27,7 @@ const CreateTaskModal: React.FC<CreateTaskModalProps> = ({
   const theme = useAppSelector(state => state.theme.theme);
   const currentColors = theme === 'dark' ? darkColors : lightColors;
   const styles = createAppStyles(currentColors);
-
+  const {t} = useTranslation();
   const handleCreate = () => {
     if (taskTitle.trim()) {
       onCreate(taskTitle.trim());
@@ -46,12 +46,11 @@ const CreateTaskModal: React.FC<CreateTaskModalProps> = ({
         style={styles.modalOverlay}
         behavior={Platform.OS === 'ios' ? 'padding' : undefined}>
         <View style={styles.modalContent}>
-          <Text style={styles.modalTitle}>Nueva Tarea</Text>
-
-          <Text style={styles.label}>Título</Text>
+          <Text style={styles.modalTitle}>{t('newTask')}</Text>
+          <Text style={styles.label}>{t('titleLabel')}</Text>
           <TextInput
             style={styles.input}
-            placeholder="Ej: Diseñar página de inicio"
+            placeholder={t('examplePlaceholder')}
             placeholderTextColor={currentColors.placeholder}
             value={taskTitle}
             onChangeText={setTaskTitle}
@@ -59,10 +58,10 @@ const CreateTaskModal: React.FC<CreateTaskModalProps> = ({
 
           <View style={styles.buttonGroup}>
             <TouchableOpacity style={styles.modalButton} onPress={handleCreate}>
-              <Text style={styles.modalButtonText}>Crear</Text>
+              <Text style={styles.modalButtonText}>{t('create')}</Text>{' '}
             </TouchableOpacity>
             <TouchableOpacity style={styles.modalCloseButton} onPress={onClose}>
-              <Text style={styles.modalCloseButtonText}>Cancelar</Text>
+              <Text style={styles.modalCloseButtonText}>{t('cancel')}</Text>{' '}
             </TouchableOpacity>
           </View>
         </View>
