@@ -68,6 +68,10 @@ const TaskDetailScreen: React.FC<TaskDetailScreenProps> = ({
     }
   };
 
+  const handleExitWithoutSave = () => {
+    navigation.goBack();
+  };
+
   if (!taskData) {
     console.error(t('taskNotFound'), taskId);
     return (
@@ -103,17 +107,19 @@ const TaskDetailScreen: React.FC<TaskDetailScreenProps> = ({
         />
       </KeyboardAvoidingView>
 
-      <TouchableOpacity
-        style={[styles.saveButton, {backgroundColor: currentColors.primary}]}
-        onPress={handleSave}>
-        <Text
-          style={[
-            styles.saveButtonText,
-            {color: currentColors.buttonText || '#fff'},
-          ]}>
-          {t('saveChanges')}
-        </Text>
-      </TouchableOpacity>
+      <View style={styles.buttonGroup}>
+        <TouchableOpacity
+          style={[styles.button, {backgroundColor: currentColors.primary}]}
+          onPress={handleSave}>
+          <Text style={styles.buttonText}>{t('saveChanges')}</Text>
+        </TouchableOpacity>
+
+        <TouchableOpacity
+          style={[styles.button, {backgroundColor: currentColors.error}]}
+          onPress={handleExitWithoutSave}>
+          <Text style={styles.buttonText}>{t('exitWithoutSave')}</Text>
+        </TouchableOpacity>
+      </View>
     </View>
   );
 };

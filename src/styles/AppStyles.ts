@@ -1,6 +1,6 @@
 import {StyleSheet, TextStyle} from 'react-native';
-import { AppStylesType } from './typesStyled';
-import { MENU_WIDTH } from '../components/constants';
+import {AppStylesType} from './typesStyled';
+import {MENU_WIDTH} from '../components/constants';
 const lightColors = {
   primary: '#9b59b6',
   secondary: '#2ecc71',
@@ -12,7 +12,7 @@ const lightColors = {
   accent: '#8e44ad',
   card: '#f0ebea',
   sideMenuBackground: '#f0ebea',
-  buttonText:'#ffffff',
+  buttonText: '#ffffff',
 };
 
 const darkColors = {
@@ -26,7 +26,7 @@ const darkColors = {
   accent: '#2ecc71',
   card: '#2A2A2A',
   sideMenuBackground: '#9b59b6',
-  buttonText:'##fffff',
+  buttonText: '##fffff',
 };
 
 const Spacing = {
@@ -42,8 +42,6 @@ const Typography = {
   body: {fontSize: 16, fontWeight: '400' as TextStyle['fontWeight']},
   small: {fontSize: 12, fontWeight: '400' as TextStyle['fontWeight']},
 };
-
-
 
 const createAppStyles = (Colors: typeof lightColors): AppStylesType =>
   StyleSheet.create<AppStylesType>({
@@ -114,11 +112,12 @@ const createAppStyles = (Colors: typeof lightColors): AppStylesType =>
     },
     button: {
       borderRadius: 8,
+      flex: 1,
       alignItems: 'center',
       justifyContent: 'center',
-      paddingVertical: Spacing.medium,
+      paddingVertical: 12,
+      marginHorizontal: 5,
       backgroundColor: Colors.primary,
-      paddingHorizontal: Spacing.large,
     },
     buttonText: {
       ...Typography.body,
@@ -224,8 +223,8 @@ const createAppStyles = (Colors: typeof lightColors): AppStylesType =>
       borderRadius: 10,
       padding: 10,
       marginTop: 10,
-      color: Colors.text, // El texto usará el color dinámico
-      backgroundColor: Colors.card, // Fondo dinámico
+      color: Colors.text,
+      backgroundColor: Colors.card,
     },
     categoryContainer: {
       flexDirection: 'row',
@@ -403,6 +402,21 @@ const createAppStyles = (Colors: typeof lightColors): AppStylesType =>
     switchContainer: {
       flexDirection: 'row',
       alignItems: 'center',
+    },
+    cancelButton: {
+      borderRadius: 8,
+      alignItems: 'center',
+      justifyContent: 'center',
+      marginTop: 10,
+      paddingVertical: 12,
+      paddingHorizontal: 20,
+      backgroundColor: '#e74c3c',
+    },
+    cancelButtonText: {
+      fontSize: 16,
+      fontWeight: '600',
+      textAlign: 'center',
+      color: '#fff',
     },
   });
 

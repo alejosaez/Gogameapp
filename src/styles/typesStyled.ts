@@ -58,4 +58,6 @@ export interface AppStylesType {
   selectedText: TextStyle;
   title: TextStyle;
   switchContainer: ViewStyle;
+  cancelButton: ViewStyle;
+cancelButtonText: TextStyle
 }

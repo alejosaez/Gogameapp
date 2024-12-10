@@ -21,6 +21,8 @@ const resources = {
       taskTitlePlaceholder: 'Enter task title',
       taskContentPlaceholder: 'Write task details here...',
       saveChanges: 'Save Changes',
+
+      exitWithoutSave: 'Exit Without Save',
     },
   },
   es: {
@@ -41,6 +43,7 @@ const resources = {
       taskTitlePlaceholder: 'Introduce el título de la tarea',
       taskContentPlaceholder: 'Escribe los detalles de la tarea aquí...',
       saveChanges: 'Guardar Cambios',
+      exitWithoutSave: 'Salir sin guardar',
     },
   },
 };
