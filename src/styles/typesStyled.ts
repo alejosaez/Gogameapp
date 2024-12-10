@@ -21,7 +21,7 @@ export interface AppStylesType {
   saveButton: ViewStyle;
   saveButtonText: TextStyle;
   titleInput: TextStyle;
-  editor: ViewStyle;
+  editor: TextStyle;
   editorContainer: ViewStyle;
   taskItemContainer: ViewStyle;
   modalOverlay: ViewStyle;
