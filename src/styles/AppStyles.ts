@@ -5,7 +5,7 @@ const lightColors = {
   primary: '#9b59b6',
   secondary: '#2ecc71',
   background: '#f4f4f4',
-  text: '#FFF',
+  text: '#333',
   error: '#e74c3c',
   border: '#ddd',
   placeholder: '#aaa',
