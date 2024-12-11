@@ -30,9 +30,9 @@ const SideMenu: React.FC<SideMenuProps> = ({visible, onClose}) => {
   }, [visible, animate]);
 
   const handleLanguageChange = (language: 'en' | 'es') => {
-    dispatch(setLanguage(language)); // Cambia el idioma en Redux
-    i18n.changeLanguage(language); // Cambia el idioma en i18next
-    setDropdownOpen(false); // Cierra el dropdown
+    dispatch(setLanguage(language)); 
+    i18n.changeLanguage(language); 
+    setDropdownOpen(false); 
   };
 
   return (

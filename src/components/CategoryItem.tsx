@@ -13,6 +13,7 @@ interface CategoryItemProps {
   onPress: () => void;
   onDelete: () => void;
   onSelect: () => void;
+  lockedBy?: string;
 }
 
 const CategoryItem: React.FC<CategoryItemProps> = ({

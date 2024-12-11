@@ -4,6 +4,8 @@ import {
   addTask,
   updateTask,
   deleteTask,
+  lockTask,
+  unlockTask,
 } from '../actions/tasksActions';
 import {initialState, Task} from '../../types/types';
 
@@ -43,6 +45,22 @@ const tasksSlice = createSlice({
         state.allTasks = state.allTasks.filter(
           task => task.id !== action.payload,
         );
+      })
+      .addCase(lockTask.fulfilled, (state, action: PayloadAction<Task>) => {
+        const index = state.allTasks.findIndex(
+          task => task.id === action.payload.id,
+        );
+        if (index !== -1) {
+          state.allTasks[index] = action.payload;
+        }
+      })
+      .addCase(unlockTask.fulfilled, (state, action: PayloadAction<Task>) => {
+        const index = state.allTasks.findIndex(
+          task => task.id === action.payload.id,
+        );
+        if (index !== -1) {
+          state.allTasks[index] = action.payload;
+        }
       });
   },
 });

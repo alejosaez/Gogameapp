@@ -8,7 +8,7 @@
     "lint": "eslint .",
     "start": "react-native start",
     "test": "jest",
-    "remove-comments": "node scripts/remove-comments.js",
+    "remove-comment": "node scripts/remove-comments.js",
     "format": "yarn remove-comments && prettier --write \"src/**/*.{js,ts,tsx}\""
   },
   "dependencies": {
@@ -27,9 +27,12 @@
     "react-native-screens": "^4.3.0",
     "react-native-sfsymbols": "^1.2.2",
     "react-native-svg": "^15.9.0",
+    "react-native-uuid": "^2.0.3",
     "react-native-vector-icons": "^10.2.0",
     "react-native-webview": "^13.12.4",
-    "react-redux": "^9.1.2"
+    "react-redux": "^9.1.2",
+    "socket.io-client": "^4.8.1",
+    "uuid": "^11.0.3"
   },
   "devDependencies": {
     "@babel/core": "^7.25.2",

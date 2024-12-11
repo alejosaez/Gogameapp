@@ -12,6 +12,8 @@ import CategoryItem from '../components/CategoryItem';
 import {createAppStyles, lightColors, darkColors} from '../styles/AppStyles';
 import {Task} from '../types/types';
 import {useTranslation} from 'react-i18next';
+import uuid from 'react-native-uuid';
+import socket from '../../socket';
 type HomeScreenNavigationProp = StackNavigationProp<RootStackParamList, 'Home'>;
 
 const HomeScreen: React.FC = () => {
@@ -20,11 +22,11 @@ const HomeScreen: React.FC = () => {
   const alltasks = useAppSelector((state: RootState) => state.tasks.allTasks);
   const theme = useAppSelector((state: RootState) => state.theme.theme);
   const {t} = useTranslation();
-
+  const [lockedTasks, setLockedTasks] = useState<Record<number, string>>({});
   const [searchText, setSearchText] = useState<string>('');
   const [isModalVisible, setIsModalVisible] = useState<boolean>(false);
   const [selectedTasks, setSelectedTasks] = useState<number[]>([]);
-
+  const [sessionId] = useState<string>(uuid.v4() as string);
   const currentColors = theme === 'dark' ? darkColors : lightColors;
   const styles = createAppStyles(currentColors);
 
@@ -32,12 +34,38 @@ const HomeScreen: React.FC = () => {
     dispatch(fetchTasks());
   }, [dispatch]);
 
+  useEffect(() => {
+    socket.on(
+      'taskLockState',
+      ({taskId, lockedBy}: {taskId: number; lockedBy: string | null}) => {
+        setLockedTasks(prev => {
+          const updated = {...prev};
+          if (lockedBy) {
+            updated[taskId] = lockedBy;
+          } else {
+            delete updated[taskId];
+          }
+          return updated;
+        });
+      },
+    );
+
+    socket.on('taskUpdated', (updatedTask: Task) => {
+      console.log('Task updated in real-time:', updatedTask);
+      dispatch(fetchTasks());
+    });
+
+    return () => {
+      socket.off('taskLockState');
+      socket.off('taskUpdated');
+    };
+  }, [dispatch]);
   const handleCreateTask = (title: string, content?: string) => {
-    dispatch(addTask({ title, content }));
+    dispatch(addTask({title, content}));
   };
 
   const handleDeleteTask = (id: number) => {
-    dispatch(deleteTask(id));
+    dispatch(deleteTask({id, requestedBy: sessionId})); // Usar el identificador generado
   };
 
   const toggleSelectTask = (id: number) => {
@@ -77,6 +105,7 @@ const HomeScreen: React.FC = () => {
             }}
             onDelete={() => handleDeleteTask(item.id)}
             onSelect={() => toggleSelectTask(item.id)}
+            lockedBy={lockedTasks[item.id]}
           />
         )}
         ListEmptyComponent={
