@@ -32,8 +32,8 @@ const HomeScreen: React.FC = () => {
     dispatch(fetchTasks());
   }, [dispatch]);
 
-  const handleCreateTask = (title: string) => {
-    dispatch(addTask({title}));
+  const handleCreateTask = (title: string, content?: string) => {
+    dispatch(addTask({ title, content }));
   };
 
   const handleDeleteTask = (id: number) => {

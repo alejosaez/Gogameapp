@@ -14,7 +14,7 @@ import {useTranslation} from 'react-i18next';
 interface CreateTaskModalProps {
   isVisible: boolean;
   onClose: () => void;
-  onCreate: (title: string) => void;
+  onCreate: (title: string, content: string) => void;
 }
 
 const CreateTaskModal: React.FC<CreateTaskModalProps> = ({
@@ -23,15 +23,16 @@ const CreateTaskModal: React.FC<CreateTaskModalProps> = ({
   onCreate,
 }) => {
   const [taskTitle, setTaskTitle] = useState('');
-
+  const [taskContent, setTaskContent] = useState('');
   const theme = useAppSelector(state => state.theme.theme);
   const currentColors = theme === 'dark' ? darkColors : lightColors;
   const styles = createAppStyles(currentColors);
   const {t} = useTranslation();
   const handleCreate = () => {
     if (taskTitle.trim()) {
-      onCreate(taskTitle.trim());
+      onCreate(taskTitle.trim(), taskContent.trim());
       setTaskTitle('');
+      setTaskContent('');
       onClose();
     }
   };
@@ -47,21 +48,32 @@ const CreateTaskModal: React.FC<CreateTaskModalProps> = ({
         behavior={Platform.OS === 'ios' ? 'padding' : undefined}>
         <View style={styles.modalContent}>
           <Text style={styles.modalTitle}>{t('newTask')}</Text>
+
           <Text style={styles.label}>{t('titleLabel')}</Text>
           <TextInput
-  style={[styles.input, {color: currentColors.text}]}
-  placeholder={t('examplePlaceholder')}
-  placeholderTextColor={currentColors.placeholder}
-  value={taskTitle}
-  onChangeText={setTaskTitle}
-/>
+            style={[styles.input, {color: currentColors.text}]}
+            placeholder={t('examplePlaceholder')}
+            placeholderTextColor={currentColors.placeholder}
+            value={taskTitle}
+            onChangeText={setTaskTitle}
+          />
+
+          <Text style={styles.label}>{t('contentLabel')}</Text>
+          <TextInput
+            style={[styles.input, {color: currentColors.text, height: 100}]}
+            placeholder={t('contentPlaceholder')}
+            placeholderTextColor={currentColors.placeholder}
+            value={taskContent}
+            onChangeText={setTaskContent}
+            multiline={true}
+          />
 
           <View style={styles.buttonGroup}>
             <TouchableOpacity style={styles.modalButton} onPress={handleCreate}>
-              <Text style={styles.modalButtonText}>{t('create')}</Text>{' '}
+              <Text style={styles.modalButtonText}>{t('create')}</Text>
             </TouchableOpacity>
             <TouchableOpacity style={styles.modalCloseButton} onPress={onClose}>
-              <Text style={styles.modalCloseButtonText}>{t('cancel')}</Text>{' '}
+              <Text style={styles.modalCloseButtonText}>{t('cancel')}</Text>
             </TouchableOpacity>
           </View>
         </View>

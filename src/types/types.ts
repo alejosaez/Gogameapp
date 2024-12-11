@@ -1,5 +1,6 @@
 export interface CreateTaskPayload {
   title: string;
+  content?: string;
 }
 
 export interface Task {
