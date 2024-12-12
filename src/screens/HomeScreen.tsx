@@ -15,6 +15,8 @@ import {useTranslation} from 'react-i18next';
 import uuid from 'react-native-uuid';
 import socket from '../../socket';
 import CheckboxIcon from '../components/CheckboxIcon';
+import TrashIconLarge from '../components/TrashIconLarge';
+
 type HomeScreenNavigationProp = StackNavigationProp<RootStackParamList, 'Home'>;
 
 const HomeScreen: React.FC = () => {
@@ -69,7 +71,13 @@ const HomeScreen: React.FC = () => {
   const handleDeleteTask = (id: number) => {
     dispatch(deleteTask({id, requestedBy: sessionId}));
   };
-
+  const handleDeleteSelectedTasks = () => {
+    selectedTasks.forEach(taskId => {
+      dispatch(deleteTask({id: taskId, requestedBy: sessionId}));
+    });
+    setSelectedTasks([]); // Limpiar las tareas seleccionadas
+    setIsAllSelected(false); // Restablecer el selector múltiple
+  };
   const toggleSelectTask = (id: number) => {
     if (selectedTasks.includes(id)) {
       setSelectedTasks(selectedTasks.filter(selectedId => selectedId !== id));
@@ -125,11 +133,14 @@ const HomeScreen: React.FC = () => {
           <Text style={styles.emptyStateText}>{t('noTasks')}</Text>
         }
       />
-      <TouchableOpacity
-        style={styles.createButton}
-        onPress={() => setIsModalVisible(true)}>
-        <AddTaskIcon />
-      </TouchableOpacity>
+  <TouchableOpacity
+  style={isAllSelected ? styles.trashButton : styles.createButton}
+  onPress={
+    isAllSelected ? handleDeleteSelectedTasks : () => setIsModalVisible(true)
+  }
+>
+  {isAllSelected ? <TrashIconLarge /> : <AddTaskIcon />}
+</TouchableOpacity>
       <CreateTaskModal
         isVisible={isModalVisible}
         onClose={() => setIsModalVisible(false)}

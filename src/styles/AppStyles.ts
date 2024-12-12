@@ -112,6 +112,17 @@ const createAppStyles = (Colors: typeof lightColors): AppStylesType =>
       shadowOpacity: 0.25,
       shadowRadius: 3.84,
     },
+    trashButton: {
+      position: 'absolute',
+      bottom: 16,
+      right: 16,
+      justifyContent: 'center',
+      alignItems: 'center',
+      width: 56,
+      height: 56,
+      backgroundColor: 'transparent',
+      elevation: 0,
+    },
     text: {
       ...Typography.body,
       color: Colors.text,
