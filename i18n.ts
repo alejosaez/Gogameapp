@@ -27,6 +27,7 @@ const resources = {
       areYouSure: 'Are you sure?',
       deleteConfirmationMessage: 'This action cannot be undone.',
       deleteAll: 'Delete All',
+      noNotes: 'You have no notes',
     },
   },
   es: {
@@ -52,7 +53,7 @@ const resources = {
       contentLabel: 'Contenido de la tarea',
       areYouSure: '¿Estás seguro?',
       deleteConfirmationMessage: 'Esta acción no se puede deshacer.',
-
+      noNotes: 'No tiene ninguna nota',
       deleteAll: 'Eliminar todo',
     },
   },

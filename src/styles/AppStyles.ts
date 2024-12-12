@@ -221,6 +221,8 @@ const createAppStyles = (Colors: typeof lightColors): AppStylesType =>
       shadowOpacity: 0.25,
       shadowRadius: 4,
       elevation: 5,
+      borderWidth: 1, // Grosor del borde
+      borderColor: '#ccc8cf', // Color del borde
     },
     modalContentDelete: {
       width: '90%',

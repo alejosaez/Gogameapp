@@ -5,6 +5,7 @@ import ArrowIcon from './ArrowIcon';
 import CheckboxIcon from './CheckboxIcon';
 import {useAppSelector} from '../redux/reduxHook';
 import {createAppStyles, lightColors, darkColors} from '../styles/AppStyles';
+import { useTranslation } from 'react-i18next';
 
 interface CategoryItemProps {
   title: string;
@@ -27,12 +28,12 @@ const CategoryItem: React.FC<CategoryItemProps> = ({
   const theme = useAppSelector(state => state.theme.theme);
   const currentColors = theme === 'dark' ? darkColors : lightColors;
   const styles = createAppStyles(currentColors);
-
+  const {t} = useTranslation();
   const displayContent = content.trim()
-    ? content.length > 20
-      ? `${content.slice(0, 20)}...`
-      : content
-    : 'No tiene ninguna nota';
+  ? content.length > 20
+    ? `${content.slice(0, 20)}...`
+    : content
+  : t('noNotes');
 
   return (
     <View style={styles.rowContainer}>

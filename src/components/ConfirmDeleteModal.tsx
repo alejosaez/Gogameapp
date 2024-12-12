@@ -21,7 +21,7 @@ const ConfirmDeleteModal: React.FC<{
       visible={isVisible}
       onRequestClose={onClose}>
       <View style={styles.modalOverlay}>
-        <View style={styles.modalContentDelete}>
+        <View style={styles.modalContent}>
           <Text style={styles.modalTitle}>{t('areYouSure')}</Text>
           <Text style={styles.modalMessage}>
             {t('deleteConfirmationMessage')}
