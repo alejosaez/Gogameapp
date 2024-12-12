@@ -1,4 +1,4 @@
-import {StyleSheet, TextStyle} from 'react-native';
+import {Platform, StyleSheet, TextStyle} from 'react-native';
 import {AppStylesType} from './typesStyled';
 import {MENU_WIDTH} from '../components/constants';
 const lightColors = {
@@ -373,7 +373,9 @@ const createAppStyles = (Colors: typeof lightColors): AppStylesType =>
       color: Colors.text,
     },
     backButton: {
-      fontSize: Typography.h2.fontSize,
+      fontSize: Platform.OS === 'android'
+        ? Typography.h2.fontSize * 1.5
+        : Typography.h2.fontSize,
       color: Colors.text,
       marginBottom: Spacing.large,
     },
