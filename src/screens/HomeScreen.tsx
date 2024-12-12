@@ -16,6 +16,7 @@ import uuid from 'react-native-uuid';
 import socket from '../../socket';
 import CheckboxIcon from '../components/CheckboxIcon';
 import TrashIconLarge from '../components/TrashIconLarge';
+import ConfirmDeleteModal from '../components/ConfirmDeleteModal';
 
 type HomeScreenNavigationProp = StackNavigationProp<RootStackParamList, 'Home'>;
 
@@ -33,7 +34,7 @@ const HomeScreen: React.FC = () => {
   const currentColors = theme === 'dark' ? darkColors : lightColors;
   const styles = createAppStyles(currentColors);
   const [isAllSelected, setIsAllSelected] = useState(false);
-
+  const [isDeleteModalVisible, setIsDeleteModalVisible] = useState(false);
   useEffect(() => {
     dispatch(fetchTasks());
   }, [dispatch]);
@@ -75,8 +76,8 @@ const HomeScreen: React.FC = () => {
     selectedTasks.forEach(taskId => {
       dispatch(deleteTask({id: taskId, requestedBy: sessionId}));
     });
-    setSelectedTasks([]); // Limpiar las tareas seleccionadas
-    setIsAllSelected(false); // Restablecer el selector múltiple
+    setSelectedTasks([]);
+    setIsDeleteModalVisible(false);
   };
   const toggleSelectTask = (id: number) => {
     if (selectedTasks.includes(id)) {
@@ -97,15 +98,18 @@ const HomeScreen: React.FC = () => {
   return (
     <View style={styles.container}>
       <View style={styles.searchBarContainer}>
-        <CheckboxIcon isChecked={isAllSelected} onPress={toggleSelectAllTasks} />
-  <TextInput
-    style={styles.searchBar}
-    placeholder={t('searchPlaceholder')}
-    placeholderTextColor={currentColors.placeholder}
-    value={searchText}
-    onChangeText={setSearchText}
-  />
-</View>
+        <CheckboxIcon
+          isChecked={isAllSelected}
+          onPress={toggleSelectAllTasks}
+        />
+        <TextInput
+          style={styles.searchBar}
+          placeholder={t('searchPlaceholder')}
+          placeholderTextColor={currentColors.placeholder}
+          value={searchText}
+          onChangeText={setSearchText}
+        />
+      </View>
       <FlatList
         data={alltasks.filter(task =>
           task.title.toLowerCase().includes(searchText.toLowerCase()),
@@ -133,14 +137,26 @@ const HomeScreen: React.FC = () => {
           <Text style={styles.emptyStateText}>{t('noTasks')}</Text>
         }
       />
-  <TouchableOpacity
-  style={isAllSelected ? styles.trashButton : styles.createButton}
-  onPress={
-    isAllSelected ? handleDeleteSelectedTasks : () => setIsModalVisible(true)
-  }
->
-  {isAllSelected ? <TrashIconLarge /> : <AddTaskIcon />}
-</TouchableOpacity>
+      <TouchableOpacity
+        style={isAllSelected ? styles.trashButton : styles.createButton}
+        onPress={() => {
+          if (isAllSelected) {
+            setIsDeleteModalVisible(true);
+          } else {
+            setIsModalVisible(true);
+          }
+        }}>
+        {isAllSelected ? <TrashIconLarge /> : <AddTaskIcon />}
+      </TouchableOpacity>
+
+      {}
+      <ConfirmDeleteModal
+        isVisible={isDeleteModalVisible}
+        onClose={() => setIsDeleteModalVisible(false)}
+        onConfirm={handleDeleteSelectedTasks}
+      />
+
+      {}
       <CreateTaskModal
         isVisible={isModalVisible}
         onClose={() => setIsModalVisible(false)}

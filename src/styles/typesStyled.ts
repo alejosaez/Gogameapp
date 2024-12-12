@@ -26,6 +26,7 @@ export interface AppStylesType {
   taskItemContainer: ViewStyle;
   modalOverlay: ViewStyle;
   modalContent: ViewStyle;
+  modalContentDelete:ViewStyle;
   label: TextStyle;
   input: TextStyle;
   categoryContainer: ViewStyle;
@@ -62,5 +63,7 @@ export interface AppStylesType {
 cancelButtonText: TextStyle;
 searchBarContainer:ViewStyle;
 trashButton: ViewStyle;
+modalMessage:TextStyle;
+confirmButton:ViewStyle;
 
 }

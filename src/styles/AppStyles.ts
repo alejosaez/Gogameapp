@@ -58,10 +58,10 @@ const createAppStyles = (Colors: typeof lightColors): AppStylesType =>
     },
     searchBar: {
       flex: 1,
-      height: 50,
+      height: 40,
       borderWidth: 2,
       borderColor: Colors.primary,
-      borderRadius: 10,
+      borderRadius: 20,
       paddingHorizontal: 10,
       backgroundColor: Colors.card,
       color: Colors.text,
@@ -139,7 +139,7 @@ const createAppStyles = (Colors: typeof lightColors): AppStylesType =>
     buttonText: {
       ...Typography.body,
       color: '#fff',
-      fontWeight: '700',
+      fontWeight: '600',
       textAlign: 'center',
     },
     createButtonText: {
@@ -222,11 +222,32 @@ const createAppStyles = (Colors: typeof lightColors): AppStylesType =>
       shadowRadius: 4,
       elevation: 5,
     },
+    modalContentDelete: {
+      width: '90%',
+      backgroundColor: Colors.primary,
+      borderRadius: 20,
+      padding: 20,
+      shadowColor: '#000',
+      shadowOffset: {width: 0, height: 2},
+      shadowOpacity: 0.25,
+      shadowRadius: 4,
+      elevation: 5,
+    },
     modalTitle: {
       fontSize: 20,
       fontWeight: 'bold',
       color: Colors.text,
       marginBottom: 10,
+    },
+    modalMessage: {
+      fontSize: 16,
+      color: Colors.text,
+      marginBottom: 20,
+    },
+    confirmButton: {
+      backgroundColor: '#e74c3c',
+      padding: 15,
+      borderRadius: 10,
     },
     label: {
       fontSize: 14,

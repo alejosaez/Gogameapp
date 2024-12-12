@@ -24,6 +24,9 @@ const resources = {
       contentLabel: 'Task Content',
       contentPlaceholder: 'Write task details here...',
       exitWithoutSave: 'Exit Without Save',
+      areYouSure: 'Are you sure?',
+      deleteConfirmationMessage: 'This action cannot be undone.',
+      deleteAll: 'Delete All',
     },
   },
   es: {
@@ -47,6 +50,10 @@ const resources = {
       exitWithoutSave: 'Salir sin guardar',
       contentPlaceholder: 'Contenido de la tarea',
       contentLabel: 'Contenido de la tarea',
+      areYouSure: '¿Estás seguro?',
+      deleteConfirmationMessage: 'Esta acción no se puede deshacer.',
+
+      deleteAll: 'Eliminar todo',
     },
   },
 };

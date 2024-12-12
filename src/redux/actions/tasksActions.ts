@@ -2,11 +2,11 @@ import { createAsyncThunk } from '@reduxjs/toolkit';
 import axios from 'axios';
 import { Platform } from 'react-native';
 import { CreateTaskPayload, Task } from '../../types/types';
+
 const BASE_URL =
   Platform.OS === 'android'
     ? 'http://10.0.2.2:3000/tasks' // Dirección para emuladores Android
     : 'http://localhost:3000/tasks'; // Dirección para emuladores iOS o simuladores
-
 export const fetchTasks = createAsyncThunk<Task[]>(
   'tasks/fetchTasks',
   async () => {
@@ -39,7 +39,7 @@ export const deleteTask = createAsyncThunk<number, { id: number; requestedBy: st
   'tasks/deleteTask',
   async ({ id, requestedBy }) => {
     await axios.delete(`${BASE_URL}/${id}`, {
-      data: { requestedBy }, 
+      data: { requestedBy },
     });
     return id;
   },
