@@ -59,5 +59,6 @@ export interface AppStylesType {
   title: TextStyle;
   switchContainer: ViewStyle;
   cancelButton: ViewStyle;
-cancelButtonText: TextStyle
+cancelButtonText: TextStyle;
+searchBarContainer:ViewStyle;
 }

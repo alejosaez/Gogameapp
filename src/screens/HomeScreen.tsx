@@ -14,6 +14,7 @@ import {Task} from '../types/types';
 import {useTranslation} from 'react-i18next';
 import uuid from 'react-native-uuid';
 import socket from '../../socket';
+import CheckboxIcon from '../components/CheckboxIcon';
 type HomeScreenNavigationProp = StackNavigationProp<RootStackParamList, 'Home'>;
 
 const HomeScreen: React.FC = () => {
@@ -29,6 +30,7 @@ const HomeScreen: React.FC = () => {
   const [sessionId] = useState<string>(uuid.v4() as string);
   const currentColors = theme === 'dark' ? darkColors : lightColors;
   const styles = createAppStyles(currentColors);
+  const [isAllSelected, setIsAllSelected] = useState(false);
 
   useEffect(() => {
     dispatch(fetchTasks());
@@ -65,7 +67,7 @@ const HomeScreen: React.FC = () => {
   };
 
   const handleDeleteTask = (id: number) => {
-    dispatch(deleteTask({id, requestedBy: sessionId})); // Usar el identificador generado
+    dispatch(deleteTask({id, requestedBy: sessionId}));
   };
 
   const toggleSelectTask = (id: number) => {
@@ -75,16 +77,27 @@ const HomeScreen: React.FC = () => {
       setSelectedTasks([...selectedTasks, id]);
     }
   };
-
+  const toggleSelectAllTasks = () => {
+    if (isAllSelected) {
+      setSelectedTasks([]);
+    } else {
+      const allTaskIds = alltasks.map(task => task.id);
+      setSelectedTasks(allTaskIds);
+    }
+    setIsAllSelected(!isAllSelected);
+  };
   return (
     <View style={styles.container}>
-      <TextInput
-        style={styles.searchBar}
-        placeholder={t('searchPlaceholder')}
-        placeholderTextColor={currentColors.placeholder}
-        value={searchText}
-        onChangeText={setSearchText}
-      />
+      <View style={styles.searchBarContainer}>
+        <CheckboxIcon isChecked={isAllSelected} onPress={toggleSelectAllTasks} />
+  <TextInput
+    style={styles.searchBar}
+    placeholder={t('searchPlaceholder')}
+    placeholderTextColor={currentColors.placeholder}
+    value={searchText}
+    onChangeText={setSearchText}
+  />
+</View>
       <FlatList
         data={alltasks.filter(task =>
           task.title.toLowerCase().includes(searchText.toLowerCase()),

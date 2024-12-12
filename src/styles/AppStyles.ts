@@ -11,6 +11,7 @@ const lightColors = {
   placeholder: '#aaa',
   accent: '#8e44ad',
   card: '#f0ebea',
+
   sideMenuBackground: '#f0ebea',
   buttonText: '#ffffff',
 };
@@ -50,15 +51,20 @@ const createAppStyles = (Colors: typeof lightColors): AppStylesType =>
       backgroundColor: Colors.background,
       padding: 16,
     },
+    searchBarContainer: {
+      flexDirection: 'row',
+      alignItems: 'center',
+      marginBottom: 24,
+    },
     searchBar: {
-      height: 40,
-      borderWidth: 1,
-      borderColor: Colors.border,
-      borderRadius: 8,
+      flex: 1,
+      height: 50,
+      borderWidth: 2,
+      borderColor: Colors.primary,
+      borderRadius: 10,
       paddingHorizontal: 10,
       backgroundColor: Colors.card,
       color: Colors.text,
-      marginBottom: 16,
     },
     taskItemContainer: {
       flexDirection: 'row',
@@ -373,9 +379,10 @@ const createAppStyles = (Colors: typeof lightColors): AppStylesType =>
       color: Colors.text,
     },
     backButton: {
-      fontSize: Platform.OS === 'android'
-        ? Typography.h2.fontSize * 1.5
-        : Typography.h2.fontSize,
+      fontSize:
+        Platform.OS === 'android'
+          ? Typography.h2.fontSize * 1.5
+          : Typography.h2.fontSize,
       color: Colors.text,
       marginBottom: Spacing.large,
     },
