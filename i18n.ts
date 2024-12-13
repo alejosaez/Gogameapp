@@ -28,6 +28,8 @@ const resources = {
       deleteConfirmationMessage: 'This action cannot be undone.',
       deleteAll: 'Delete All',
       noNotes: 'You have no notes',
+      developmentMessage: 'In development',
+      ok: 'OK',
     },
   },
   es: {
@@ -55,6 +57,8 @@ const resources = {
       deleteConfirmationMessage: 'Esta acción no se puede deshacer.',
       noNotes: 'No tiene ninguna nota',
       deleteAll: 'Eliminar todo',
+      developmentMessage: 'En desarrollo',
+    ok: 'Aceptar',
     },
   },
 };

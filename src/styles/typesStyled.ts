@@ -65,5 +65,7 @@ searchBarContainer:ViewStyle;
 trashButton: ViewStyle;
 modalMessage:TextStyle;
 confirmButton:ViewStyle;
-
+modalCenteredText:TextStyle;
+fullWidthButton:ViewStyle;
+centeredView:ViewStyle;
 }

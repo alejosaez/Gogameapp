@@ -5,6 +5,8 @@ import {createAppStyles, lightColors, darkColors} from '../styles/AppStyles';
 import {setLanguage} from '../redux/reducers/languageSlice';
 import useSlideAnimation from './hook/ useSlideAnimation';
 import i18n from '../../i18n';
+import DevelopmentModal from './DeploimentModal';
+
 interface SideMenuProps {
   visible: boolean;
   onClose: () => void;
@@ -17,6 +19,7 @@ const SideMenu: React.FC<SideMenuProps> = ({visible, onClose}) => {
   const currentColors = theme === 'dark' ? darkColors : lightColors;
   const styles = createAppStyles(currentColors);
 
+  const [isLoginModalVisible, setLoginModalVisible] = useState(false);
   const [isDropdownOpen, setDropdownOpen] = useState(false);
 
   const {slideAnim, animate} = useSlideAnimation(-300);
@@ -30,66 +33,80 @@ const SideMenu: React.FC<SideMenuProps> = ({visible, onClose}) => {
   }, [visible, animate]);
 
   const handleLanguageChange = (language: 'en' | 'es') => {
-    dispatch(setLanguage(language)); 
-    i18n.changeLanguage(language); 
-    setDropdownOpen(false); 
+    dispatch(setLanguage(language));
+    i18n.changeLanguage(language);
+    setDropdownOpen(false);
+  };
+
+  const handleLoginPress = () => {
+    setLoginModalVisible(true);
   };
 
   return (
-    <Modal
-      transparent
-      animationType="none"
-      visible={visible}
-      onRequestClose={onClose}>
-      <View style={styles.sideMenuOverlay}>
-        <Animated.View style={[styles.sideMenu, {left: slideAnim}]}>
-          <TouchableOpacity onPress={onClose}>
-            <Text style={styles.backButton}>←</Text>
-          </TouchableOpacity>
+    <>
+      <Modal
+        transparent
+        animationType="none"
+        visible={visible}
+        onRequestClose={onClose}>
+        <View style={styles.sideMenuOverlay}>
+          <Animated.View style={[styles.sideMenu, {left: slideAnim}]}>
+            <TouchableOpacity onPress={onClose}>
+              <Text style={styles.backButton}>←</Text>
+            </TouchableOpacity>
 
-          <Text style={styles.sideMenuTitle}>Menu</Text>
+            <Text style={styles.sideMenuTitle}>Menu</Text>
 
-          <TouchableOpacity
-            style={styles.sideMenuItem}
-            onPress={() => setDropdownOpen(!isDropdownOpen)}>
-            <Text style={styles.sideMenuText}>
-              {currentLanguage
-                ? currentLanguage === 'en'
-                  ? 'English'
-                  : 'Español'
-                : 'Language'}
-            </Text>
-          </TouchableOpacity>
+            <TouchableOpacity
+              style={styles.sideMenuItem}
+              onPress={() => setDropdownOpen(!isDropdownOpen)}>
+              <Text style={styles.sideMenuText}>
+                {currentLanguage === 'en' ? 'English' : 'Español'}
+              </Text>
+            </TouchableOpacity>
 
-          {isDropdownOpen && (
-            <View style={styles.dropdown}>
-              <TouchableOpacity
-                style={styles.dropdownItem}
-                onPress={() => handleLanguageChange('en')}>
-                <Text
-                  style={[
-                    styles.dropdownItemText,
-                    currentLanguage === 'en' && styles.selectedText,
-                  ]}>
-                  English
-                </Text>
-              </TouchableOpacity>
-              <TouchableOpacity
-                style={styles.dropdownItem}
-                onPress={() => handleLanguageChange('es')}>
-                <Text
-                  style={[
-                    styles.dropdownItemText,
-                    currentLanguage === 'es' && styles.selectedText,
-                  ]}>
-                  Español
-                </Text>
-              </TouchableOpacity>
-            </View>
-          )}
-        </Animated.View>
-      </View>
-    </Modal>
+            {isDropdownOpen && (
+              <View style={styles.dropdown}>
+                <TouchableOpacity
+                  style={styles.dropdownItem}
+                  onPress={() => handleLanguageChange('en')}>
+                  <Text
+                    style={[
+                      styles.dropdownItemText,
+                      currentLanguage === 'en' && styles.selectedText,
+                    ]}>
+                    English
+                  </Text>
+                </TouchableOpacity>
+                <TouchableOpacity
+                  style={styles.dropdownItem}
+                  onPress={() => handleLanguageChange('es')}>
+                  <Text
+                    style={[
+                      styles.dropdownItemText,
+                      currentLanguage === 'es' && styles.selectedText,
+                    ]}>
+                    Español
+                  </Text>
+                </TouchableOpacity>
+              </View>
+            )}
+
+            <TouchableOpacity style={styles.sideMenuItem} onPress={handleLoginPress}>
+              <Text style={styles.sideMenuText}>
+                {currentLanguage === 'en' ? 'Log in' : 'Iniciar sesión'}
+              </Text>
+            </TouchableOpacity>
+          </Animated.View>
+        </View>
+      </Modal>
+
+      {/* Modal de "En desarrollo" */}
+      <DevelopmentModal
+        visible={isLoginModalVisible}
+        onClose={() => setLoginModalVisible(false)}
+      />
+    </>
   );
 };
 

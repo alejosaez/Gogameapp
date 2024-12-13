@@ -221,8 +221,14 @@ const createAppStyles = (Colors: typeof lightColors): AppStylesType =>
       shadowOpacity: 0.25,
       shadowRadius: 4,
       elevation: 5,
-      borderWidth: 1, // Grosor del borde
-      borderColor: '#ccc8cf', // Color del borde
+      borderWidth: 1,
+      borderColor: '#ccc8cf',
+    },
+    modalCenteredText: {
+      textAlign: 'center',
+      fontSize: 18,
+      marginBottom: 20,
+      color: '#000',
     },
     modalContentDelete: {
       width: '90%',
@@ -240,11 +246,19 @@ const createAppStyles = (Colors: typeof lightColors): AppStylesType =>
       fontWeight: 'bold',
       color: Colors.text,
       marginBottom: 10,
+      textAlign: 'center',
     },
     modalMessage: {
       fontSize: 16,
       color: Colors.text,
       marginBottom: 20,
+    },
+    fullWidthButton: {
+      width: '100%',
+      padding: 15,
+      backgroundColor: '#007BFF', // Ajusta según el tema
+      borderRadius: 10,
+      alignItems: 'center',
     },
     confirmButton: {
       backgroundColor: '#e74c3c',
@@ -327,6 +341,12 @@ const createAppStyles = (Colors: typeof lightColors): AppStylesType =>
       color: Colors.text,
       fontWeight: '600',
       textAlign: 'center',
+    },
+    centeredView: {
+      width: '100%',
+      justifyContent: 'center',
+      alignItems: 'center',
+      marginBottom: 20,
     },
     iconSpacing: {
       marginRight: 10,
