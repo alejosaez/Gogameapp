@@ -1,85 +1,201 @@
-This is a new [**React Native**](https://reactnative.dev) project, bootstrapped using [`@react-native-community/cli`](https://github.com/react-native-community/cli).
+# Task Management Application Documentation
 
-# Getting Started
+## **Application Name**
+**GoGameApp**
 
-> **Note**: Make sure you have completed the [React Native - Environment Setup](https://reactnative.dev/docs/environment-setup) instructions till "Creating a new application" step, before proceeding.
+## **Description**
+GoGameApp is a task management application designed to help users efficiently organize and manage their activities. It offers functionalities such as task creation, editing, searching, and deletion.
 
-## Step 1: Start the Metro Server
+---
 
-First, you will need to start **Metro**, the JavaScript _bundler_ that ships _with_ React Native.
+## **Key Features**
+- **Task Management**: Create, edit, and delete tasks.
+- **Multi-selection**: Select multiple tasks for batch actions (e.g., deletion).
+- **Search**: Search bar with filtering functionality.
+- **Internationalization**: Support for multiple languages using `i18next` (Spanish and English).
+- **Dark/Light Mode**: Dynamic theming for a better visual experience.
+- **Modern Interface**: Responsive and accessible design implemented with `React Native`.
 
-To start Metro, run the following command from the _root_ of your React Native project:
+---
 
+## **Technologies Used**
+
+### **Frontend**
+- **React Native**: The primary framework for building the mobile application.
+- **React Navigation**: Navigation management within the application.
+- **React Native Vector Icons**: Custom icons for the UI.
+
+### **Global State Management**
+- **Redux Toolkit**: Handles global state management.
+- **React Redux**: Integrates Redux with React Native.
+
+### **Internationalization**
+- **i18next**: Implements multilingual support.
+
+### **Development Libraries**
+- **Typescript**: Static typing for improved code robustness and maintainability.
+- **ESLint and Prettier**: Tools for maintaining clean and styled code.
+
+---
+
+## **System Requirements**
+- **Node.js**: `>= 18`
+- **React Native CLI**
+- **Android Studio** or **Xcode** for device emulation and testing.
+
+---
+
+## **Project Structure**
+
+```plaintext
+src/
+├── components/         # Reusable components (CheckboxIcon, SearchBarIcon, etc.)
+├── redux/              # Redux configuration and logic
+│   ├── actions/        # Redux actions
+│   ├── reducers/       # Reducers to handle global state
+│   ├── store.ts        # Redux store configuration
+├── screens/            # Main screens (HomeScreen, TaskDetail, etc.)
+├── styles/             # Global styles
+├── navigation/         # Navigation configuration
+├── types/              # TypeScript type definitions
+├── hooks/              # Custom hooks (e.g., for animations)
+
+---
+
+## **Installation**
+
+### **1. Clone the Repository**
 ```bash
-# using npm
-npm start
+git clone https://github.com/your-username/your-repository.git
+cd gogameapp
 
-# OR using Yarn
-yarn start
-```
+yarn install
 
-## Step 2: Start your Application
+## ** iOS **
 
-Let Metro Bundler run in its _own_ terminal. Open a _new_ terminal from the _root_ of your React Native project. Run the following command to start your _Android_ or _iOS_ app:
+cd ios
+pod install
+cd ..
 
-### For Android
+## **Dependencies**
 
+| Package                     | Version  | Description                                 |
+|-----------------------------|----------|---------------------------------------------|
+| `@react-navigation/native`  | `^7.0.7` | Navigation management                      |
+| `@reduxjs/toolkit`          | `^2.3.0` | Global state management                    |
+| `i18next`                   | `^24.0.5`| Internationalization                       |
+| `react-native-vector-icons` | `^10.2.0`| Custom icons for UI                        |
+
+
+## **Development Tools**
+
+| Package                     | Version  | Description                                 |
+|-----------------------------|----------|---------------------------------------------|
+| `typescript`                | `5.0.4`  | Static typing                               |
+| `eslint`                    | `^8.19.0`| Code analysis                               |
+| `prettier`                  | `^3.4.1` | Code formatter                              |
+
+
+
+
+# Documentación de la Aplicación de Tareas
+
+## **Nombre de la Aplicación**
+**GoGameApp**
+
+## **Descripción**
+GoGameApp es una aplicación de gestión de tareas diseñada para ayudar a los usuarios a organizar y administrar sus actividades de manera eficiente. Ofrece funcionalidades como la creación, edición, búsqueda y eliminación de tareas.
+
+---
+
+## **Características Principales**
+- **Gestión de tareas**: Crear, editar y eliminar tareas.
+- **Selección múltiple**: Selección de múltiples tareas para acciones masivas (como eliminar).
+- **Búsqueda**: Barra de búsqueda con funcionalidad de filtro.
+- **Internacionalización**: Soporte para múltiples idiomas utilizando `i18next` (español e inglés).
+- **Modo oscuro/claro**: Tema dinámico para mejorar la experiencia visual.
+- **Interfaz moderna**: Diseño responsivo y accesible, implementado con `React Native`.
+
+---
+
+## **Tecnologías Utilizadas**
+
+### **Frontend**
+- **React Native**: Framework principal para la construcción de la aplicación móvil.
+- **React Navigation**: Manejo de la navegación en la aplicación.
+- **React Native Vector Icons**: Íconos personalizados para la UI.
+
+### **Estado Global**
+- **Redux Toolkit**: Manejo del estado global de la aplicación.
+- **React Redux**: Integración de Redux con React Native.
+
+### **Internacionalización**
+- **i18next**: Implementación de soporte multilingüe.
+
+### **Librerías de Desarrollo**
+- **Typescript**: Tipado estático para mejorar la robustez y mantenibilidad del código.
+- **ESLint y Prettier**: Herramientas para mantener un código limpio y estilizado.
+
+---
+
+## **Requisitos del Sistema**
+- **Node.js**: `>= 18`
+- **React Native CLI**
+- **Android Studio** o **Xcode** para emulación y pruebas en dispositivos.
+
+---
+
+## **Estructura del Proyecto**
+
+
+src/
+├── components/         # Componentes reutilizables (CheckboxIcon, SearchBarIcon, etc.)
+├── redux/              # Configuración y lógica de Redux
+│   ├── actions/        # Acciones de Redux
+│   ├── reducers/       # Reducers para manejar el estado global
+│   ├── store.ts        # Configuración del store
+├── screens/            # Pantallas principales (HomeScreen, TaskDetail, etc.)
+├── styles/             # Estilos globales
+├── navigation/         # Configuración de navegación
+├── types/              # Definición de tipos para TypeScript
+├── hooks/              # Custom hooks (por ejemplo, para animaciones)
+
+
+
+
+---
+
+## **Instalación**
+
+### **1. Clonar el Repositorio**
 ```bash
-# using npm
-npm run android
+git clone https://github.com/tu-usuario/tu-repositorio.git
+cd gogameapp
 
-# OR using Yarn
-yarn android
-```
+yarn install
 
-### For iOS
+## ** IOS **
 
-```bash
-# using npm
-npm run ios
+cd ios
+pod install
+cd ..
 
-# OR using Yarn
-yarn ios
-```
+Dependencias
 
-If everything is set up _correctly_, you should see your new app running in your _Android Emulator_ or _iOS Simulator_ shortly provided you have set up your emulator/simulator correctly.
+| Paquete                      | Versión  | Descripción                                  |
+|------------------------------|----------|----------------------------------------------|
+| `@react-navigation/native`   | `^7.0.7` | Manejo de navegación                        |
+| `@reduxjs/toolkit`           | `^2.3.0` | Manejo del estado global                    |
+| `i18next`                    | `^24.0.5`| Internacionalización                        |
+| `react-native-vector-icons`  | `^10.2.0`| Íconos personalizados                       |
 
-This is one way to run your app — you can also run it directly from within Android Studio and Xcode respectively.
 
-## Step 3: Modifying your App
+Herramientas de Desarrollo
 
-Now that you have successfully run the app, let's modify it.
+| Paquete                      | Versión  | Descripción                                  |
+|------------------------------|----------|----------------------------------------------|
+| `typescript`                 | `5.0.4`  | Tipado estático                              |
+| `eslint`                     | `^8.19.0`| Análisis de código                           |
+| `prettier`                   | `^3.4.1` | Formateador de código                        |
 
-1. Open `App.tsx` in your text editor of choice and edit some lines.
-2. For **Android**: Press the <kbd>R</kbd> key twice or select **"Reload"** from the **Developer Menu** (<kbd>Ctrl</kbd> + <kbd>M</kbd> (on Window and Linux) or <kbd>Cmd ⌘</kbd> + <kbd>M</kbd> (on macOS)) to see your changes!
 
-   For **iOS**: Hit <kbd>Cmd ⌘</kbd> + <kbd>R</kbd> in your iOS Simulator to reload the app and see your changes!
-
-## Congratulations! :tada:
-
-You've successfully run and modified your React Native App. :partying_face:
-
-### Now what?
-
-- If you want to add this new React Native code to an existing application, check out the [Integration guide](https://reactnative.dev/docs/integration-with-existing-apps).
-- If you're curious to learn more about React Native, check out the [Introduction to React Native](https://reactnative.dev/docs/getting-started).
-
-# Troubleshooting
-
-If you can't get this to work, see the [Troubleshooting](https://reactnative.dev/docs/troubleshooting) page.
-
-# Learn More
-
-To learn more about React Native, take a look at the following resources:
-
-- [React Native Website](https://reactnative.dev) - learn more about React Native.
-- [Getting Started](https://reactnative.dev/docs/environment-setup) - an **overview** of React Native and how setup your environment.
-- [Learn the Basics](https://reactnative.dev/docs/getting-started) - a **guided tour** of the React Native **basics**.
-- [Blog](https://reactnative.dev/blog) - read the latest official React Native **Blog** posts.
-- [`@facebook/react-native`](https://github.com/facebook/react-native) - the Open Source; GitHub **repository** for React Native.
-
-paquete de instalacion
-
-yarn add @react-navigation/native react-native-screens react-native-safe-area-context react-native-gesture-handler react-native-reanimated react-native-vector-icons
-
-yarn add @react-navigation/stack
