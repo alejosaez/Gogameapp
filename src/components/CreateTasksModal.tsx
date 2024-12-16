@@ -11,6 +11,7 @@ import {
 import {useAppSelector} from '../redux/reduxHook';
 import {createAppStyles, lightColors, darkColors} from '../styles/AppStyles';
 import {useTranslation} from 'react-i18next';
+
 interface CreateTaskModalProps {
   isVisible: boolean;
   onClose: () => void;
@@ -24,16 +25,22 @@ const CreateTaskModal: React.FC<CreateTaskModalProps> = ({
 }) => {
   const [taskTitle, setTaskTitle] = useState('');
   const [taskContent, setTaskContent] = useState('');
+  const [titleError, setTitleError] = useState(false); // Estado para errores de título
+
   const theme = useAppSelector(state => state.theme.theme);
   const currentColors = theme === 'dark' ? darkColors : lightColors;
   const styles = createAppStyles(currentColors);
   const {t} = useTranslation();
+
   const handleCreate = () => {
     if (taskTitle.trim()) {
+      setTitleError(false); // Reinicia el error si el título es válido
       onCreate(taskTitle.trim(), taskContent.trim());
       setTaskTitle('');
       setTaskContent('');
       onClose();
+    } else {
+      setTitleError(true); // Muestra un error si el título está vacío
     }
   };
 
@@ -51,12 +58,24 @@ const CreateTaskModal: React.FC<CreateTaskModalProps> = ({
 
           <Text style={styles.label}>{t('titleLabel')}</Text>
           <TextInput
-            style={[styles.input, {color: currentColors.text}]}
+            style={[
+              styles.input,
+              {color: currentColors.text},
+              titleError && {borderColor: 'red', borderWidth: 1},
+            ]}
             placeholder={t('examplePlaceholder')}
             placeholderTextColor={currentColors.placeholder}
             value={taskTitle}
-            onChangeText={setTaskTitle}
+            onChangeText={text => {
+              setTaskTitle(text);
+              if (text.trim()) setTitleError(false);
+            }}
           />
+          {titleError && (
+            <Text style={{color: 'red', marginTop: 5}}>
+              {t('titleRequired')}
+            </Text>
+          )}
 
           <Text style={styles.label}>{t('contentLabel')}</Text>
           <TextInput

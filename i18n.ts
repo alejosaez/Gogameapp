@@ -30,6 +30,7 @@ const resources = {
       noNotes: 'You have no notes',
       developmentMessage: 'In development',
       ok: 'OK',
+      titleRequired: 'Title is required',
     },
   },
   es: {
@@ -58,7 +59,8 @@ const resources = {
       noNotes: 'No tiene ninguna nota',
       deleteAll: 'Eliminar todo',
       developmentMessage: 'En desarrollo',
-    ok: 'Aceptar',
+      ok: 'Aceptar',
+      titleRequired: 'El título es obligatorio',
     },
   },
 };
