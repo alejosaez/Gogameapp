@@ -55,13 +55,15 @@ const SideMenu: React.FC<SideMenuProps> = ({visible, onClose}) => {
               <Text style={styles.backButton}>←</Text>
             </TouchableOpacity>
 
-            <Text style={styles.sideMenuTitle}>Menu</Text>
+            <Text style={styles.sideMenuTitle}>{i18n.t('menu')}</Text>
 
             <TouchableOpacity
               style={styles.sideMenuItem}
               onPress={() => setDropdownOpen(!isDropdownOpen)}>
               <Text style={styles.sideMenuText}>
-                {currentLanguage === 'en' ? 'English' : 'Español'}
+                {currentLanguage === 'en'
+                  ? i18n.t('english')
+                  : i18n.t('spanish')}
               </Text>
             </TouchableOpacity>
 
@@ -75,7 +77,7 @@ const SideMenu: React.FC<SideMenuProps> = ({visible, onClose}) => {
                       styles.dropdownItemText,
                       currentLanguage === 'en' && styles.selectedText,
                     ]}>
-                    English
+                    {i18n.t('english')}
                   </Text>
                 </TouchableOpacity>
                 <TouchableOpacity
@@ -86,22 +88,22 @@ const SideMenu: React.FC<SideMenuProps> = ({visible, onClose}) => {
                       styles.dropdownItemText,
                       currentLanguage === 'es' && styles.selectedText,
                     ]}>
-                    Español
+                    {i18n.t('spanish')}
                   </Text>
                 </TouchableOpacity>
               </View>
             )}
 
-            <TouchableOpacity style={styles.sideMenuItem} onPress={handleLoginPress}>
-              <Text style={styles.sideMenuText}>
-                {currentLanguage === 'en' ? 'Log in' : 'Iniciar sesión'}
-              </Text>
+            <TouchableOpacity
+              style={styles.sideMenuItem}
+              onPress={handleLoginPress}>
+              <Text style={styles.sideMenuText}>{i18n.t('login')}</Text>
             </TouchableOpacity>
           </Animated.View>
         </View>
       </Modal>
 
-      {/* Modal de "En desarrollo" */}
+
       <DevelopmentModal
         visible={isLoginModalVisible}
         onClose={() => setLoginModalVisible(false)}

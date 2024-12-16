@@ -5,6 +5,7 @@ import {store} from './src/redux/store';
 const resources = {
   en: {
     translation: {
+      menu: 'Menu',
       welcome: 'Welcome to the app!',
       tasks: 'Tasks',
       create: 'Create',
@@ -31,10 +32,13 @@ const resources = {
       developmentMessage: 'In development',
       ok: 'OK',
       titleRequired: 'Title is required',
+      english: 'English',
+      spanish: 'Spanish',
     },
   },
   es: {
     translation: {
+      menu: 'Menú',
       welcome: '¡Bienvenido a la aplicación!',
       tasks: 'Tareas',
       create: 'Crear',
@@ -61,6 +65,8 @@ const resources = {
       developmentMessage: 'En desarrollo',
       ok: 'Aceptar',
       titleRequired: 'El título es obligatorio',
+      english: 'Inglés',
+      spanish: 'Español',
     },
   },
 };

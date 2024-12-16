@@ -25,7 +25,7 @@ const CreateTaskModal: React.FC<CreateTaskModalProps> = ({
 }) => {
   const [taskTitle, setTaskTitle] = useState('');
   const [taskContent, setTaskContent] = useState('');
-  const [titleError, setTitleError] = useState(false); // Estado para errores de título
+  const [titleError, setTitleError] = useState(false); 
 
   const theme = useAppSelector(state => state.theme.theme);
   const currentColors = theme === 'dark' ? darkColors : lightColors;
@@ -34,13 +34,13 @@ const CreateTaskModal: React.FC<CreateTaskModalProps> = ({
 
   const handleCreate = () => {
     if (taskTitle.trim()) {
-      setTitleError(false); // Reinicia el error si el título es válido
+      setTitleError(false);
       onCreate(taskTitle.trim(), taskContent.trim());
       setTaskTitle('');
       setTaskContent('');
       onClose();
     } else {
-      setTitleError(true); // Muestra un error si el título está vacío
+      setTitleError(true); 
     }
   };
 
